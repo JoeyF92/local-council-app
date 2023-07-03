@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "jest --watchAll",
-    "dev": "nodemon index.js",
+    "dev": "nodemon ./server/index.js",
     "setup-db": "node ./data/setup-db.js",
     "coverage": "jest --coverage"
   },
