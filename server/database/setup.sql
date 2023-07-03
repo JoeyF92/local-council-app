@@ -27,7 +27,7 @@ CREATE TABLE votingSubmissions (
     date_time_entry TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
     votes INT,
     submission_status VARCHAR(50),
-    FOREIGN KEY ("user_id") REFERENCES users("user_id"),
+    FOREIGN KEY ("user_id") REFERENCES users("user_id")
 );
 
 
