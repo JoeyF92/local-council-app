@@ -21,13 +21,13 @@ CREATE TABLE votingSubmissions (
     submission_id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     title VARCHAR (50) NOT NULL,
     category VARCHAR (30) NOT NULL,
-    submission VARCHAR NOT NULL,
-    photo VARCHAR(200) NOT NULL,
+    submission VARCHAR(1000) NOT NULL,
+    photo VARCHAR(200),
     user_id INT NOT NULL,
     date_time_entry TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
     votes INT,
     submission_status VARCHAR(50),
-    FOREIGN KEY ("user_id") REFERENCES users("user_id"),
+    FOREIGN KEY ("user_id") REFERENCES users("user_id")
 );
 
 
