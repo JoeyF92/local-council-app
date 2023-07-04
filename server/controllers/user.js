@@ -41,9 +41,9 @@ async function login(req, res) {
 }
 
 async function logout(req, res) {
-  const tokenObj = req.tokenObj;
+  const token = req.headers.authorization;
   try {
-    const response = await tokenObj.removeToken();
+    const response = await Token.removeToken(token);
     res.status(202).json({ message: response });
   } catch (error) {
     res.status(403).json({ Error: error.message });
