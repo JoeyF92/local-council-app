@@ -6,6 +6,7 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
   <script src="index.js" defer></script>
+  <script src="nav.js" defer></script>
   <link rel="stylesheet" type="text/css" href="styles.css">
 </head>
 <body>
@@ -15,12 +16,15 @@
             <a class="navbar-brand" href="index.html">Florin Council</a>
           </div>
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="#">Register</a></li>
+            <li><a id="logoutButton" href="#">Login</a></li>
             <li><a id="profile" href="#"><span class="glyphicon glyphicon-user"></span>Profile</a></li>
           </ul>
         </div>
     </nav>
   
+   <div id="navbar-placeholder">
+    
+   </div>
   <div class="container">
     <div class="main-image">
       <img src="assets/town-logo.png" alt="Center Image">
