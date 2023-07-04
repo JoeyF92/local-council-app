@@ -1,6 +1,6 @@
-DROP TABLE IF EXISTS users;
-DROP TABLE IF EXISTS token;
-DROP TABLE IF EXISTS votingSubmissions;
+DROP TABLE IF EXISTS users CASCADE;
+DROP TABLE IF EXISTS token CASCADE;
+DROP TABLE IF EXISTS voting_submissions CASCADE;
 
 CREATE TABLE users(
     user_id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
@@ -17,17 +17,20 @@ CREATE TABLE token (
     FOREIGN KEY ("user_id") REFERENCES users("user_id")
 );
 
-CREATE TABLE votingSubmissions (
+CREATE TABLE voting_submissions (
     submission_id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     title VARCHAR (50) NOT NULL,
     category VARCHAR (30) NOT NULL,
-    submission VARCHAR(1000) NOT NULL,
+    proposal VARCHAR(1000) NOT NULL,
     photo VARCHAR(200),
-    user_id INT NOT NULL,
     date_time_entry TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
-    votes INT,
-    submission_status VARCHAR(50),
-    FOREIGN KEY ("user_id") REFERENCES users("user_id")
+    votes INT DEFAULT 0,
+    submission_status VARCHAR(50) DEFAULT 'pending'
 );
+
+    INSERT INTO voting_submissions(title, category, proposal, photo) 
+    VALUES(
+        'Park', 'Maintenance', 'Fix the swings', 'https://media.istockphoto.com/id/513138217/photo/job-interview.jpg?s=612x612&w=0&k=20&c=CwDG8FhQBorpFCp_jUyv33lTf1n3SEVNBMXPUGCDHyI='
+        );
 
 
