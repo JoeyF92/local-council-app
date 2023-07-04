@@ -41,6 +41,7 @@ async function login(req, res) {
 }
 
 async function logout(req, res) {
+  console.log("controller")
   const tokenObj = req.tokenObj;
   try {
     const response = await tokenObj.removeToken();
