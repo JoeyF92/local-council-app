@@ -23,7 +23,7 @@ const loggedIn = ()=>{
                 localStorage.removeItem('token')
                 localStorage.removeItem('username')
                 profile.innerText = `Profile`
-                windows.history.back()
+                window.location.href="index.html"
             }else{
                 console.log(res)
                 console.log(data)
