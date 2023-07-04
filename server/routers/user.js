@@ -6,5 +6,6 @@ const userRouter = Router();
 
 userRouter.post("/register", userController.register);
 userRouter.post("/login", userController.login);
+userRouter.delete("/logout", authenticator, userController.logout);
 //userRouter.post("/login", userController.login);
 module.exports = userRouter;
