@@ -46,6 +46,18 @@ class Token {
       return new Token(response.rows[0]);
     }
   }
+
+  async removeToken() {
+    const response = await db.query("DELETE FROM token WHERE token = $1", [
+      this.token,
+    ]);
+
+    if (!response) {
+      throw new Error("Unable to locate token.");
+    } else {
+      return "Token Deleted";
+    }
+  }
 }
 
 module.exports = Token;

@@ -40,7 +40,18 @@ async function login(req, res) {
   }
 }
 
+async function logout(req, res) {
+  const tokenObj = req.tokenObj;
+  try {
+    const response = await tokenObj.removeToken();
+    res.status(202).json({ message: response });
+  } catch (error) {
+    res.status(403).json({ Error: error.message });
+  }
+}
+
 module.exports = {
   register,
   login,
+  logout,
 };
