@@ -2,6 +2,7 @@ DROP TABLE IF EXISTS users CASCADE;
 DROP TABLE IF EXISTS token CASCADE;
 DROP TABLE IF EXISTS votingSubmissions CASCADE;
 
+
 CREATE TABLE users(
     user_id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     username VARCHAR(100) NOT NULL,
@@ -17,18 +18,17 @@ CREATE TABLE token (
     FOREIGN KEY ("user_id") REFERENCES users("user_id")
 );
 
-CREATE TABLE votingSubmissions (
+CREATE TABLE voting_submissions (
     submission_id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     title VARCHAR (100) NOT NULL,
     category VARCHAR (30) NOT NULL,
-    submission VARCHAR NOT NULL,
-    photo VARCHAR(200) NOT NULL,
-    user_id INT NOT NULL,
+    proposal VARCHAR(1000) NOT NULL,
+    photo VARCHAR(200),
     date_time_entry TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
-    votes INT,
-    submission_status VARCHAR(50),
-    FOREIGN KEY ("user_id") REFERENCES users("user_id")
+    votes INT DEFAULT 0,
+    submission_status VARCHAR(50) DEFAULT 'pending'
 );
+
 
 INSERT INTO users (username, pass_word, user_address, isAdmin)
 VALUES
@@ -41,7 +41,6 @@ VALUES
     ('ChristopherMiller', 'password7', '555 Cedar Ave', false),
     ('JessicaWilson', 'password8', '777 Spruce Blvd', false),
     ('MatthewTaylor', 'password9', '222 Walnut Ct', false);
-
 
 INSERT INTO votingSubmissions (title, category, submission, photo, user_id, votes, submission_status)
 VALUES
