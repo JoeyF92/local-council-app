@@ -1,0 +1,48 @@
+#navbar{
+  color: #E0B1A9;
+}
+
+.container {
+  display: flex;
+  flex-direction: row;
+}
+
+.main-image {
+  width: 300px; /* Adjust the width as desired */
+  height: 300px; /* Adjust the height as desired */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+.button-container {
+  display: flex;
+  justify-content: space-between ;
+  margin-top: 20px;
+}
+
+.button-container button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.button-container button img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.button-container button span {
+  margin-top: 10px;
+  text-align: center;
+}
+.carousel-inner .item img {
+  width: 100%;
+  height: 400px; /* Adjust the height as desired */
+  object-fit: scale-down; /*can also use cover to have a fully covered and stretched carousel*/
+}
+
