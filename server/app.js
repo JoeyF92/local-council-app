@@ -3,7 +3,7 @@ const cors = require("cors");
 
 const logRoutes = require("./middleware/logger");
 
-//const userRouter = require("./routers/user");
+const userRouter = require("./routers/user");
 //add other routers here:
 
 const app = express();
@@ -20,7 +20,7 @@ app.get("/", (req, res) => {
   });
 });
 
-//app.use("/users", userRouter);
+app.use("/users", userRouter);
 // add other paths here
 
 module.exports = app;
