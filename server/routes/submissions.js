@@ -12,6 +12,7 @@ submissionRouter.post("/", SubmissionsController.createSubmission);
 // submissionRouter.delete("/id", SubmissionsController.deleteSubmission);
 submissionRouter.put("/:id", SubmissionsController.updateSubmission);
 submissionRouter.patch("/vote/:id", SubmissionsController.vote);
+submissionRouter.patch("/", SubmissionsController.clearVotes)
 submissionRouter.patch("/:id", SubmissionsController.updateSubmissionStatus);
 
 module.exports = submissionRouter;

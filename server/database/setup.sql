@@ -1,6 +1,7 @@
 DROP TABLE IF EXISTS users CASCADE;
 DROP TABLE IF EXISTS token CASCADE;
 DROP TABLE IF EXISTS voting_submissions CASCADE;
+
 CREATE TABLE users(
     user_id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     username VARCHAR(100) NOT NULL,
@@ -15,6 +16,7 @@ CREATE TABLE token (
     token CHAR(36) UNIQUE NOT NULL,
     FOREIGN KEY ("user_id") REFERENCES users("user_id")
 );
+
 CREATE TABLE voting_submissions (
     submission_id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     title VARCHAR (100) NOT NULL,
@@ -27,6 +29,7 @@ CREATE TABLE voting_submissions (
     FOREIGN KEY ("user_id") REFERENCES users("user_id"),
     submission_status VARCHAR(50) DEFAULT 'pending'
 );
+
 INSERT INTO users (username, pass_word, user_address, isAdmin)
 VALUES
     ('JohnDoe', 'password1', '123 Main St', false),

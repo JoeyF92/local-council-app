@@ -1,4 +1,6 @@
-const Submissions = require("../models/Submissions");
+const Submissions = require('../models/Submissions')
+const User = require('../models/User')
+const Token = require('../models/Token')
 
 class SubmissionController {
   static async getAllSubmissions(req, res) {
@@ -66,16 +68,30 @@ class SubmissionController {
     } catch (err) {
       res.status(404).json({ error: "Failed to update status" });
     }
-  }
-  static async vote(req, res) {
-    const { id } = req.params;
-    const count = parseInt(req.body.votes);
-    try {
-      const updatedSubmission = await Submissions.vote(count, id);
-      res.json(updatedSubmission);
-      console.log("voted");
-    } catch (err) {
-      res.status(500).json({ error: "Failed to vote for the submission" });
+    static async vote(req, res){
+        const { id } = req.params;
+        const count = parseInt(req.body.votes);
+        try {
+            const token = req.headers.authorization;
+            const user = await Token.getOneByToken(token)
+        if(user.votes_used + count > 7) {
+            throw new Error('Exceeded maximum votes allowed');
+        }
+            const updatedSubmission = await Submissions.vote(count, id);
+            res.json(updatedSubmission);
+            console.log("voted")
+        }catch (err) {
+        res.status(500).json({ error: 'Failed to vote for the submission' });
+        }
+    }
+
+    static async clearVotes(req, res){
+        try {
+            const data = await Submissions.clearVotes()
+            res.status(200).json(data)
+        } catch (error) {
+            res.status(500).json({error:`Internal Server Error - ${error}`})
+        }
     }
   }
 }
