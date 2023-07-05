@@ -1,6 +1,5 @@
 document.querySelector("#login").addEventListener("click", async (e) => {
     e.preventDefault();
-    console.log(e.target)
     const form = new FormData(document.getElementById("userInfo"));
     
     const options = {
@@ -14,16 +13,13 @@ document.querySelector("#login").addEventListener("click", async (e) => {
             password: form.get("password")
         })
     }
-    console.log(options["body"]["username"])
 
     const response = await fetch("http://localhost:3000/users/login", options);
-    console.log(response)
     const data = await response.json();
-    console.log(data)
     if (response.status == 200) {
         localStorage.setItem("username", form.get("username"))
         localStorage.setItem("token", data.token.token);
-        window.location.assign("index.html");
+        window.history.back();
     } else {
         alert(data.error);
     }
