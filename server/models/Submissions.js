@@ -17,7 +17,7 @@ class Submissions{
     static async getSubmissionsByStatus(submission_status){
         const query = 'SELECT * FROM voting_submissions WHERE submission_status= $1'
         const {rows} = await db.query(query,[submission_status])
-        return rows[0]
+        return rows
     }
 
     static async createSubmission(submission){
@@ -44,13 +44,20 @@ class Submissions{
         return rows[0]
     }
 
-    static async vote(count, id){
+    static async vote(count, id, user_id){
         const query = `UPDATE voting_submissions SET votes = votes + $1 WHERE submission_id = $2`;
         const values = [count, id];
+        const userQuery = `UPDATE users SET votes_used = votes_used + $1 WHERE user_id = $2`;
+        const userValues = [count, user_id];
         const {rows} = await db.query(query, values)
-        return rows[0]
+        const {userRows} = await db.query(userQuery,userValues)
+        return {submission: rows[0], users: userRows[0]}
     }
 
+    static async clearVotes(){
+        const query = `UPDATE users SET votes_used = 0`;
+        await db.query(query)
+    }
 }
 
 module.exports = Submissions
