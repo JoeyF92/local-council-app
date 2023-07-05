@@ -101,6 +101,9 @@ const populateTable = (data) => {
     //edit button
     const editButton = document.createElement("button");
     editButton.textContent = "Edit";
+    editButton.addEventListener("click", () =>
+      showEditForm(item, submission_id)
+    );
     decisionCell.appendChild(editButton);
 
     dataRow.appendChild(decisionCell);
@@ -130,6 +133,148 @@ const decisionHandle = async (action, id) => {
 
   if (response.status == 200) {
     console.log("it worked");
+  } else {
+    console.log(data.error);
+  }
+};
+
+const showEditForm = (item, id) => {
+  const formContainer = document.querySelector("#form-container");
+
+  // Clear any existing content in the form container
+  formContainer.innerHTML = "";
+
+  // Create the form
+  const form = document.createElement("form");
+  //   form.method = "post";
+
+  // Title input
+  const titleLabel = document.createElement("label");
+  titleLabel.textContent = "Title:";
+  const titleInput = document.createElement("input");
+  titleInput.type = "text";
+  titleInput.name = "title";
+  titleInput.required = true;
+  titleInput.value = `${item.title}`;
+
+  form.appendChild(titleLabel);
+  form.appendChild(titleInput);
+  form.appendChild(document.createElement("br"));
+
+  // Category input
+  const categoryLabel = document.createElement("label");
+  categoryLabel.textContent = "Category:";
+  const categoryInput = document.createElement("input");
+  categoryInput.type = "text";
+  categoryInput.name = "category";
+  categoryInput.required = true;
+  categoryInput.value = `${item.category}`;
+  form.appendChild(categoryLabel);
+  form.appendChild(categoryInput);
+  form.appendChild(document.createElement("br"));
+
+  // Proposal input
+  const proposalLabel = document.createElement("label");
+  proposalLabel.textContent = "Proposal:";
+  const proposalTextarea = document.createElement("textarea");
+  proposalTextarea.name = "proposal";
+  proposalTextarea.required = true;
+  proposalTextarea.value = `${item.proposal}`;
+  form.appendChild(proposalLabel);
+  form.appendChild(document.createElement("br"));
+  form.appendChild(proposalTextarea);
+  form.appendChild(document.createElement("br"));
+
+  // Photo input
+  const photoLabel = document.createElement("label");
+  photoLabel.textContent = "Photo URL:";
+  const photoInput = document.createElement("input");
+  photoInput.type = "url";
+  photoInput.name = "photo";
+  photoInput.required = true;
+  photoInput.value = `${item.photo}`;
+  form.appendChild(photoLabel);
+  form.appendChild(photoInput);
+  form.appendChild(document.createElement("br"));
+
+  // Submission status input
+  const statusLabel = document.createElement("label");
+  statusLabel.textContent = "Submission Status:";
+  const statusSelect = document.createElement("select");
+  statusSelect.name = "status";
+  statusSelect.value = `${item.status}`;
+
+  const statusOptions = [
+    { label: "Pending", value: "pending" },
+    { label: "Denied", value: "denied" },
+    { label: "Approved", value: "approved" },
+    { label: "In Progress", value: "in-progress" },
+    { label: "Complete", value: "complete" },
+  ];
+
+  statusOptions.forEach((option) => {
+    const statusOption = document.createElement("option");
+    statusOption.value = option.value;
+    statusOption.textContent = option.label;
+    statusSelect.appendChild(statusOption);
+  });
+
+  form.appendChild(statusLabel);
+  form.appendChild(statusSelect);
+  form.appendChild(document.createElement("br"));
+
+  // Submit button
+  const submitButton = document.createElement("input");
+  submitButton.type = "submit";
+  submitButton.value = "Submit";
+  form.appendChild(submitButton);
+
+  form.addEventListener("submit", (e) => submitEdit(e, id));
+
+  // Close button
+  const closeButton = document.createElement("button");
+  closeButton.textContent = "x";
+  closeButton.classList.add("close-button");
+  closeButton.addEventListener(
+    "click",
+    () => {
+      formContainer.hidden = true;
+    },
+    { once: true }
+  );
+  formContainer.appendChild(closeButton);
+  formContainer.appendChild(form);
+  formContainer.hidden = false;
+};
+
+const submitEdit = async (e, id) => {
+  e.preventDefault();
+  const formContainer = document.querySelector("#form-container");
+  console.log(id);
+  const form = e.target;
+  const options = {
+    method: "PUT",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      title: form.elements.title.value,
+      category: form.elements.category.value,
+      proposal: form.elements.proposal.value,
+      photo: form.elements.photo.value,
+      submission_status: form.elements.status.value,
+    }),
+  };
+  const response = await fetch(
+    `http://localhost:3000/submissions/${id}`,
+    options
+  );
+  const data = await response.json();
+  if (response.status == 200) {
+    console.log(data);
+    formContainer.hidden = true;
+    location.reload();
   } else {
     console.log(data.error);
   }

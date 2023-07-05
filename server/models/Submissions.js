@@ -6,12 +6,14 @@ class Submissions{
         const {rows} = await db.query(query)
         return rows
     }
+  
 
     static async getSubmissionById(id) {
         const query = "SELECT * FROM voting_submissions WHERE submission_id = $1";
         const { rows } = await db.query(query, [id]);
         return rows[0];
       }
+  
 
     static async getSubmissionsByStatus(submission_status) {
         const query =
@@ -20,6 +22,7 @@ class Submissions{
         return rows;
       }
 
+ 
     static async createSubmission(submission) {
         const { title, category, proposal, photo } = submission;
         const query =
@@ -29,14 +32,16 @@ class Submissions{
         return rows[0];
       }
 
-      static async updateSubmission(id, submission) {
-        const { title, category, proposal, photo } = submission;
-        const query =
-          "UPDATE voting_submissions SET title = $1, category = $2, proposal = $3, photo = $4 WHERE submission_id = $5 RETURNING *";
-        const values = [title, category, proposal, photo, id];
-        const { rows } = await db.query(query, values);
-        return rows[0];
-      }
+  
+    static async updateSubmission(id, submission) {
+    const { title, category, proposal, photo, submission_status } = submission;
+    const query =
+      "UPDATE voting_submissions SET title = $1, category = $2, proposal = $3, photo = $4, submission_status = $5 WHERE submission_id = $6 RETURNING *";
+    const values = [title, category, proposal, photo, submission_status, id];
+    const { rows } = await db.query(query, values);
+    console.log(rows[0]);
+    return rows[0];
+  }
 
       static async updateSubmissionStatus(id, action) {
         const query =
@@ -46,6 +51,7 @@ class Submissions{
         console.log(rows[0]);
         return rows[0];
       }
+  
 
     static async vote(count, id, user_id){
         const query = `UPDATE voting_submissions SET votes = votes + $1 WHERE submission_id = $2`;
@@ -57,6 +63,7 @@ class Submissions{
         return {submission: rows[0], users: userRows[0]}
     }
 
+
     static async clearVotes(){
         const query = `UPDATE users SET votes_used = 0`;
         await db.query(query)
@@ -67,6 +74,7 @@ class Submissions{
         const {rows} = await db.query(query)
         return rows
     }
+
 }
 
 module.exports = Submissions;

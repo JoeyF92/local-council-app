@@ -1,5 +1,5 @@
-#navbar{
-  color: #E0B1A9;
+#navbar {
+  color: #e0b1a9;
 }
 
 .container {
@@ -15,10 +15,9 @@
   justify-content: center;
 }
 
-
 .button-container {
   display: flex;
-  justify-content: space-between ;
+  justify-content: space-between;
   margin-top: 20px;
 }
 
@@ -46,3 +45,23 @@
   object-fit: scale-down; /*can also use cover to have a fully covered and stretched carousel*/
 }
 
+/* Admin styles*/
+
+#form-container {
+  display: flexbox;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 9999;
+  padding: 20px;
+  width: 400px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  background-color: white;
+}
+
+.close-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
