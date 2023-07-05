@@ -20,6 +20,7 @@ const postToCarousel = (data)=>{
     const images = document.querySelector(".carousel-inner")
     let counter=0
     indicators.innerHTML=""
+    console.log(indicators)
     data.forEach(element => {
         console.log("hi")
         const li = document.createElement('li')
