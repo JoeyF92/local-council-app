@@ -20,9 +20,8 @@ app.get("/", (req, res) => {
   });
 });
 
-app.use('/submissions', submissionRouter)
+app.use("/submissions", submissionRouter);
 app.use("/users", userRouter);
 // add other paths here
-
 
 module.exports = app;
