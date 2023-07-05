@@ -65,3 +65,10 @@
   top: 10px;
   right: 10px;
 }
+
+.resetdiv {
+  padding-top: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
