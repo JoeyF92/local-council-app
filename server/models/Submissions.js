@@ -30,11 +30,12 @@ class Submissions {
   }
 
   static async updateSubmission(id, submission) {
-    const { title, category, proposal, photo } = submission;
+    const { title, category, proposal, photo, submission_status } = submission;
     const query =
-      "UPDATE voting_submissions SET title = $1, category = $2, proposal = $3, photo = $4 WHERE submission_id = $5 RETURNING *";
-    const values = [title, category, proposal, photo, id];
+      "UPDATE voting_submissions SET title = $1, category = $2, proposal = $3, photo = $4, submission_status = $5 WHERE submission_id = $6 RETURNING *";
+    const values = [title, category, proposal, photo, submission_status, id];
     const { rows } = await db.query(query, values);
+    console.log(rows[0]);
     return rows[0];
   }
 
