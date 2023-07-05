@@ -60,8 +60,8 @@ class SubmissionController {
   static async updateSubmissionStatus(req, res) {
     try {
       const id = req.params.id;
-      const submission = req.body;
-      const result = await Submissions.updateSubmissionStatus(id, submission);
+      const action = req.body.action;
+      const result = await Submissions.updateSubmissionStatus(id, action);
       res.status(200).json(result);
     } catch (err) {
       res.status(404).json({ error: "Failed to update status" });
