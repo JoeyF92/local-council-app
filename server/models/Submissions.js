@@ -38,12 +38,12 @@ class Submissions {
     return rows[0];
   }
 
-  static async updateSubmissionStatus(id, submission) {
-    const { submission_status } = submission;
+  static async updateSubmissionStatus(id, action) {
     const query =
       "UPDATE voting_submissions SET submission_status = $1 WHERE submission_id = $2 RETURNING *";
-    const values = [submission_status, id];
+    const values = [action, parseInt(id)];
     const { rows } = await db.query(query, values);
+    console.log(rows[0]);
     return rows[0];
   }
 
