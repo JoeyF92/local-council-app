@@ -84,7 +84,30 @@ class SubmissionController {
     } catch (err) {
       res.status(500).json({ error: "Failed to vote for the submission" });
     }
-  }
+
+    static async vote(req, res){
+        const id = parseInt(req.params.id) +1;
+        const count = parseInt(req.body.vote);
+        console.log(count)
+        try {
+            const token = req.headers.authorization;
+            const tokenData = await Token.getOneByToken(token)
+            const user_id = tokenData['user_id']
+            const user = await User.getOneById(user_id)
+        if(user.votes_used + count > 7) {
+          console.log(user.votes_used + count)
+            throw new Error('Exceeded maximum votes allowed');
+        }
+            console.log(count, id, user_id)
+            const updatedSubmission = await Submissions.vote(count, id,  user_id);
+            console.log("hiya")
+            console.log(updatedSubmission)
+            res.json(updatedSubmission);
+            console.log("voted")
+        }catch (err) {
+        res.status(500).json({ error: 'Failed to vote for the submission' });
+        }
+    }
 
   static async clearVotes(req, res) {
     try {
