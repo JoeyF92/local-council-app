@@ -81,6 +81,7 @@ class SubmissionController {
       res.status(404).json({ error: "Failed to update status" });
     }
   }
+  
   static async vote(req, res){
     const id = parseInt(req.params.id);
     const count = parseInt(req.body.votes);
@@ -100,7 +101,7 @@ class SubmissionController {
     res.status(500).json({ error: 'Failed to vote for the submission' });
     }
 }
-
+  
   static async clearVotes(req, res) {
     try {
       const data = await Submissions.clearVotes();
