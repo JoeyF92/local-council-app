@@ -1,5 +1,10 @@
 const db = require("../database/connect");
 
+const Submissions = require("../models/Submissions");
+const User = require("../models/User");
+const Token = require("../models/Token");
+
+
 class Submissions {
   static async getAllSubmissions() {
     const query = "SELECT * FROM voting_submissions";
@@ -39,6 +44,7 @@ class Submissions {
     return rows[0];
   }
 
+
   static async updateSubmissionStatus(id, action) {
     const query =
       "UPDATE voting_submissions SET submission_status = $1 WHERE submission_id = $2 RETURNING *";
@@ -68,6 +74,74 @@ class Submissions {
     const query = `UPDATE voting_submissions SET submission_status = 'denied' WHERE submission_status = 'approved' RETURNING *`;
     const { rows } = await db.query(query);
     return rows;
+
+  static async updateSubmissionStatus(req, res) {
+    try {
+      const id = req.params.id;
+      const action = req.body.action;
+      const result = await Submissions.updateSubmissionStatus(id, action);
+      res.status(200).json(result);
+    } catch (err) {
+      res.status(404).json({ error: "Failed to update status" });
+    }
+  }
+  static async vote(req, res) {
+    const { id } = req.params;
+    const count = parseInt(req.body.votes);
+    try {
+      const token = req.headers.authorization;
+      const user = await Token.getOneByToken(token);
+      if (user.votes_used + count > 7) {
+        throw new Error("Exceeded maximum votes allowed");
+      }
+      const updatedSubmission = await Submissions.vote(count, id);
+      res.json(updatedSubmission);
+      console.log("voted");
+    } catch (err) {
+      res.status(500).json({ error: "Failed to vote for the submission" });
+    }
+
+    static async vote(req, res){
+        const id = parseInt(req.params.id) +1;
+        const count = parseInt(req.body.vote);
+        console.log(count)
+        try {
+            const token = req.headers.authorization;
+            const tokenData = await Token.getOneByToken(token)
+            const user_id = tokenData['user_id']
+            const user = await User.getOneById(user_id)
+        if(user.votes_used + count > 7) {
+          console.log(user.votes_used + count)
+            throw new Error('Exceeded maximum votes allowed');
+        }
+            console.log(count, id, user_id)
+            const updatedSubmission = await Submissions.vote(count, id,  user_id);
+            console.log("hiya")
+            console.log(updatedSubmission)
+            res.json(updatedSubmission);
+            console.log("voted")
+        }catch (err) {
+        res.status(500).json({ error: 'Failed to vote for the submission' });
+        }
+    }
+
+  static async clearVotes(req, res) {
+    try {
+      const data = await Submissions.clearVotes();
+      res.status(200).json(data);
+    } catch (error) {
+      res.status(500).json({ error: `Internal Server Error - ${error}` });
+    }
+  }
+
+  static async denyAll(req, res) {
+    try {
+      console.log("in here");
+      const data = await Submissions.denyAll();
+      res.status(200).json(data);
+    } catch (error) {
+      res.status(500).json({ error: `Internal Server Error - ${error}` });
+    }
   }
 }
 

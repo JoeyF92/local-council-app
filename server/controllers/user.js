@@ -13,6 +13,21 @@ class User {
     this.pass_word = pass_word;
     this.userAddress = user_address;
     this.isAdmin = is_admin;
+
+const User = require("../models/User");
+const Token = require("../models/token");
+
+async function register(req, res) {
+  //check if user is in the database before registering
+  try {
+    const data = req.body;
+    const salt = await bcrypt.genSalt(parseInt(process.env.BCRYPT_SALT_ROUNDS));
+    data["password"] = await bcrypt.hash(data["password"], salt);
+    const result = await User.create(data);
+    res.status(201).send(result);
+  } catch (err) {
+    res.status(400).json({ error: err.message });
+
   }
 
   static async getOneById(id) {
@@ -33,6 +48,16 @@ class User {
 
     if (response.rows.length != 1) {
       throw new Error("Unable to locate user.");
+
+    if (!authenticated) {
+      throw new Error("Incorrect credentials.");
+    } else {
+      // if the user is authenticated, we can assign it a token
+      const token = await Token.create(user.id);
+      //we can use the authenticated object to see if user is authenticated now, and we can pass in the token too in the response
+      const voteCount = user["votes_used"]
+      res.status(200).json({ authenticated: true, token: token, voteCount: voteCount, userId: user["id"]});
+
     }
     return new User(response.rows[0]);
   }

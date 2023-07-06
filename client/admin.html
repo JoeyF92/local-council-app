@@ -9,7 +9,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <script src="admin.js" defer></script>
-    <link rel="stylesheet" type="text/css" href="styles.css" />
+    <link rel="stylesheet" type="text/css" href="./assets/styles.css" />
   </head>
   <body>
     <nav class="navbar navbar-default">
@@ -29,6 +29,20 @@
     </nav>
 
     <section id="main">
+      <div id="status-buttons">
+        <ul>
+          <li><a href="#" id="pending-table">Review New Submissions</a></li>
+          <li>
+            <a href="#" id="results-table"
+              >View Current Results For This Month</a
+            >
+          </li>
+          <li><a href="#" id="progress-table">View In-Progress Projects</a></li>
+          <li><a href="#" id="complete-table">View Successful Projects</a></li>
+          <li><a href="#" id="denied-table">View Denied Requests</a></li>
+        </ul>
+      </div>
+      <div id="form-container" hidden></div>
       <div id="submissions-table"></div>
     </section>
 

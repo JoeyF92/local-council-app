@@ -19,7 +19,10 @@ document.querySelector("#login").addEventListener("click", async (e) => {
     if (response.status == 200) {
         localStorage.setItem("username", form.get("username"))
         localStorage.setItem("token", data.token.token);
+        localStorage.setItem("votes",(data.voteCount))
+        localStorage.setItem("user_id", data.userId)
         window.history.back();
+        alert(`Welcome ${localStorage.getItem('username')}`)
     } else {
         alert(data.error);
     }
