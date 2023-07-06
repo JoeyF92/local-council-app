@@ -66,6 +66,7 @@ class Submissions {
     console.log(rows[0]);
     return rows[0];
   }
+  //test
 
   static async updateSubmissionStatus(id, action) {
     const query =
