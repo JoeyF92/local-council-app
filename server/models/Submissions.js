@@ -7,17 +7,6 @@ class Submissions {
     return rows;
   }
 
-  static async createSubmission(submission) {
-    console.log("bye");
-    const { title, category, proposal, photo } = submission;
-    console.log("hih");
-    console.log(submission);
-    const query =
-      "INSERT INTO voting_submissions (title, category, proposal, photo) VALUES ($1, $2, $3, $4) RETURNING *";
-    const values = [title, category, proposal, photo];
-    const { rows } = await db.query(query, values);
-    return rows[0];
-  }
 
   static async getSubmissionById(id) {
     const query = "SELECT * FROM voting_submissions WHERE submission_id = $1";
@@ -60,7 +49,6 @@ class Submissions {
     console.log(rows[0]);
     return rows[0];
   }
-  //test
 
   static async updateSubmissionStatus(id, action) {
     const query =
@@ -71,18 +59,19 @@ class Submissions {
     return rows[0];
   }
 
-  static async vote(count, id, user_id) {
-    const query = `UPDATE voting_submissions SET votes = votes + $1 WHERE submission_id = $2`;
-    const values = [count, id];
-    const userQuery = `UPDATE users SET votes_used = votes_used + $1 WHERE user_id = $2`;
-    const userValues = [count, user_id];
-    console.log("here in models");
-    const { rows } = await db.query(query, values);
-    console.log(rows[0]);
-    const { userRows } = await db.query(userQuery, userValues);
-    console.log(userRows[0]);
-    return { submission: rows[0], users: userRows[0] };
-  }
+
+
+
+    static async vote(count, id, user_id){
+        const query = `UPDATE voting_submissions SET votes = votes + $1 WHERE submission_id = $2 RETURNING votes`;
+        const values = [count, id];
+        const userQuery = `UPDATE users SET votes_used = votes_used + $1 WHERE user_id = $2 RETURNING votes_used`;
+        const userValues = [count, user_id];
+        const {rows} = await db.query(query, values)
+        const userRows = await db.query(userQuery,userValues)
+        return {submission: rows[0], votes: userRows['rows'][0]['votes_used']}
+    }
+
 
   static async clearVotes() {
     const query = `UPDATE users SET votes_used = 0`;
