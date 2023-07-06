@@ -40,8 +40,20 @@ class SubmissionController {
   static async createSubmission(req, res) {
     const submission = req.body;
     try {
+      console.log("right here");
       const newSubmission = await Submissions.createSubmission(submission);
       console.log(submission);
+      res.status(201).json(newSubmission);
+    } catch (error) {
+      res.status(500).json({ Error: `Error - ${error}` });
+    }
+  }
+
+  static async newSubmission(req, res) {
+    const submission = req.body;
+    try {
+      const newSubmission = await Submissions.newSubmission(submission);
+      console.log(newSubmission);
       res.status(201).json(newSubmission);
     } catch (error) {
       res.status(500).json({ Error: `Error - ${error}` });
