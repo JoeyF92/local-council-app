@@ -1,56 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+    />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="assets/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="assets/styles.css" />
     <script src="nav.js" defer></script>
     <script src="voting.js" defer></script>
     <title>Voting</title>
-</head>
-<body>
-  <nav class="navbar navbar-default">
-    <div class="container-fluid">
-      <div class="navbar-header">
-        <a class="navbar-brand" href="index.html">Florin Council</a>
+  </head>
+  <body>
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="index.html">Florin Council</a>
+        </div>
+        <ul class="nav navbar-nav navbar-right">
+          <li><a id="logoutButton" href="#">Login</a></li>
+          <li>
+            <a id="profile" href="#"
+              ><span class="glyphicon glyphicon-user"></span>Profile</a
+            >
+          </li>
+        </ul>
       </div>
-      <ul class="nav navbar-nav navbar-right">
-        <li><a id="logoutButton" href="#">Login</a></li>
-        <li><a id="profile" href="#"><span class="glyphicon glyphicon-user"></span>Profile</a></li>
-      </ul>
+    </nav>
+    <div>
+      <h1 class="text-center">Vote</h1>
     </div>
-  </nav>
-  <div>
-    <h1 class="text-center" >Vote</h1>
-  </div>
-    
-  
+
     <div id="myCarousel" class="carousel slide" data-ride="carousel">
         <!-- Indicators -->
         <ol class="carousel-indicators">
-          <!-- This an example of a working carousel indicators with the require class names -->
-          <!-- <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-          <li data-target="#myCarousel" data-slide-to="1"></li>
-          <li data-target="#myCarousel" data-slide-to="2"></li> -->
         </ol>
       
         <!-- Wrapper for slides -->
         <div class="carousel-inner">
-          <!-- This an example of a working carousel inner with images and the require class names -->
-          <!-- <div class="item active">
-            <img src="assets/community-gardening.jpg" alt="Gardening">
-          </div>
-      
-          <div class="item">
-            <img src="assets/community-road-repairs.jpg" alt="Road Repairs">
-          </div>
-      
-          <div class="item">
-            <img src="assets/community-sitting-talking.jpg" alt="Meetups">
-          </div> -->
         </div>
         
       
@@ -66,72 +63,9 @@
     </div>
     <h2>This Months Proposals:</h2>
     <div class="panel-group" id="accordion">
-      
-      <!-- <div class="panel panel-default">
-        <div class="panel-heading">
-          <h4 class="panel-title">
-            <a data-toggle="collapse" data-parent="#accordion" href="#collapse1">
-            Collapsible Group 1</a>
-          </h4>
-        </div>
-        <div id="collapse1" class="panel-collapse collapse in">
-          <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button>
-          <div class="modal fade" id="myModal" role="dialog">
-            <div class="modal-dialog">
-            
-              Modal content
-              <div class="modal-content">
-                <div class="modal-header">
-                  <button type="button" class="close" data-dismiss="modal">&times;</button>
-                  <h4 class="modal-title">Modal Header</h4>
-                </div>
-                <div class="modal-body">
-                  <p>Some text in the modal.</p>
-                </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                </div>
-              </div>
-              
-            </div>
-          </div>
-          <div class="panel-body">Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-          sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-          minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-          commodo consequat.</div>
-        </div>
-      </div>
-      
-      <div class="panel panel-default">
-        <div class="panel-heading">
-          <h4 class="panel-title">
-            <a data-toggle="collapse" data-parent="#accordion" href="#collapse2">
-            Collapsible Group 2</a>
-          </h4>
-        </div>
-        <div id="collapse2" class="panel-collapse collapse">
-          <div class="panel-body">Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-          sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-          minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-          commodo consequat.</div>
-        </div>
-      </div>
-      <div class="panel panel-default">
-        <div class="panel-heading">
-          <h4 class="panel-title">
-            <a data-toggle="collapse" data-parent="#accordion" href="#collapse3">
-            Collapsible Group 3</a>
-          </h4>
-        </div>
-        <div id="collapse3" class="panel-collapse collapse">
-          <div class="panel-body">Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-          sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-          minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-          commodo consequat.</div>
-        </div>
-      </div> -->
-
     </div>
-      <!-- Use Bootsrap modals for the information about each proposal -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
 </body>
+
 </html>

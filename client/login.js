@@ -17,6 +17,7 @@ document.querySelector("#login").addEventListener("click", async (e) => {
     const response = await fetch("http://localhost:3000/users/login", options);
     const data = await response.json();
     if (response.status == 200) {
+        console.log(data)
         localStorage.setItem("username", form.get("username"))
         localStorage.setItem("token", data.token.token);
         localStorage.setItem("votes",(data.voteCount))

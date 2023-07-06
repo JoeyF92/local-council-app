@@ -40,8 +40,20 @@ class SubmissionController {
   static async createSubmission(req, res) {
     const submission = req.body;
     try {
+      console.log("right here");
       const newSubmission = await Submissions.createSubmission(submission);
       console.log(submission);
+      res.status(201).json(newSubmission);
+    } catch (error) {
+      res.status(500).json({ Error: `Error - ${error}` });
+    }
+  }
+
+  static async newSubmission(req, res) {
+    const submission = req.body;
+    try {
+      const newSubmission = await Submissions.newSubmission(submission);
+      console.log(newSubmission);
       res.status(201).json(newSubmission);
     } catch (error) {
       res.status(500).json({ Error: `Error - ${error}` });
@@ -69,32 +81,27 @@ class SubmissionController {
       res.status(404).json({ error: "Failed to update status" });
     }
   }
+  
   static async vote(req, res){
-    const id = parseInt(req.params.id) +1;
-    const count = parseInt(req.body.vote);
-    console.log(count)
+    const id = parseInt(req.params.id);
+    const count = parseInt(req.body.votes);
     try {
         const token = req.headers.authorization;
         const tokenData = await Token.getOneByToken(token)
         const user_id = tokenData['user_id']
         const user = await User.getOneById(user_id)
-        console.log(user)
     if(user.votes_used + count > 7) {
-      console.log(user.votes_used + count)
+      console.log("Can no longer Vote")
         throw new Error('Exceeded maximum votes allowed');
-    }
-        console.log(count, id, user_id)
+    }else{
         const updatedSubmission = await Submissions.vote(count, id,  user_id);
-        console.log("hiya")
-        console.log(updatedSubmission)
         res.json(updatedSubmission);
-        console.log("voted")
+    }
     }catch (err) {
     res.status(500).json({ error: 'Failed to vote for the submission' });
     }
 }
-  //testtest
-
+  
   static async clearVotes(req, res) {
     try {
       const data = await Submissions.clearVotes();
