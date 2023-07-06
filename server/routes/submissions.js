@@ -9,6 +9,7 @@ submissionRouter.get(
   SubmissionsController.getSubmissionsByStatus
 );
 submissionRouter.post("/", SubmissionsController.createSubmission);
+submissionRouter.post("/new", SubmissionsController.newSubmission);
 // submissionRouter.delete("/id", SubmissionsController.deleteSubmission);
 submissionRouter.put("/:id", SubmissionsController.updateSubmission);
 submissionRouter.patch("/vote/:id", SubmissionsController.vote);
@@ -16,6 +17,4 @@ submissionRouter.patch("/clearVotes", SubmissionsController.clearVotes);
 submissionRouter.patch("/denyAll", SubmissionsController.denyAll);
 submissionRouter.patch("/:id", SubmissionsController.updateSubmissionStatus);
 
-
 module.exports = submissionRouter;
-

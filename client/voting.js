@@ -1,8 +1,3 @@
-// const { createECDH } = require("crypto")
-// const { create } = require("../server/models/User")
-
-//const { vote } = require("../server/models/Submissions")
-
 const carousel = document.querySelector("#myCarousel")
 
 const fetchProposals = async () =>{

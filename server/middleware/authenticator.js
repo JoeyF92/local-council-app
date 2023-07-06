@@ -1,4 +1,4 @@
-const Token = require("../models/token");
+const Token = require("../models/Token");
 
 //check whether client request comes in with a token
 async function authenticator(req, res, next) {
