@@ -10,6 +10,7 @@ const fetchProposals = async () =>{
         const res= await fetch('http://localhost:3000/submissions')
         if (res.ok){
             const data= await res.json()
+            console.log(data)
             postToCarousel(data)
             postToAccordion(data)
         }else{
@@ -21,6 +22,7 @@ const fetchProposals = async () =>{
 }
 
 const postToCarousel = (data)=>{
+    console.log("hello")
     const indicators = document.querySelector(".carousel-indicators")
     const images = document.querySelector(".carousel-inner")
     let counter=0
@@ -30,30 +32,31 @@ const postToCarousel = (data)=>{
     data.forEach(element => {
         if(data[counter]['submission_status']=="approved"){
             const li = document.createElement('li')
-            const div = document.createElement('div')
+            //const div = document.createElement('div')
             const img = document.createElement('img')
             const imageDiv = document.createElement('div')
             const captionDiv = document.createElement('div')
             const title = document.createElement('h4')
             const p = document.createElement('p')
             li.setAttribute('data-target',"#myCarousel")
-            if(counter==0){
+            if(proposal==1){
                 //this part creates the indicator
-                div.className='item active'
-                div.append(img)
+                // div.className='item active'
+                // div.append(img)
                 li.setAttribute(`data-slide-to`, '0')
                 li.classList.add('active')
                 //this part creates the image
                 imageDiv.classList.add('item', 'active')
                 img.src = data[counter]["photo"]
+                
                 img.alt = data[counter]["title"]
                 //carousel caption
 
             }else{
                 //this part creates the indicator
-                div.className='item'
-                img.src = data["photo"]
-                div.append(img)
+                // div.className='item'
+                // img.src = data["photo"]
+                // div.append(img)
                 li.setAttribute(`data-slide-to`,`${counter}`)
                 //this part creates the image
                 imageDiv.classList.add('item')
@@ -61,6 +64,7 @@ const postToCarousel = (data)=>{
                 img.alt = data[counter]["title"]
                 
             }
+            
             //carousel caption
             captionDiv.className="carousel-caption"
             title.innerHTML = `Proposal ${proposal}`
@@ -77,6 +81,7 @@ const postToCarousel = (data)=>{
         counter ++
 
     });
+    console.log(images)
     carousel.append(indicators)
 }
 
@@ -84,7 +89,7 @@ const postToAccordion = (data) =>{
     let counter = 0
     let proposalsCounter = 1
     const div = document.querySelector('.panel-group')
-    // div.innerHTML=""
+    div.innerHTML=""
     data.forEach(element => {
         const panelDiv = document.createElement('div')
         const headingDiv = document.createElement('div')
@@ -113,12 +118,12 @@ const postToAccordion = (data) =>{
             voteButton.classList.add('btn', 'btn-info', 'btn-lg', 'btn-center')
             voteButton.setAttribute('type', 'button')
             voteButton.setAttribute('data-toggle',"modal")
-            voteButton.setAttribute('data-target',"#myModal")
-            voteButton.innerHTML = 'Vote'
+            voteButton.setAttribute('data-target',`#myModal${proposalsCounter}`)//
+            voteButton.innerHTML = `Vote ${proposalsCounter}`
             //modal content
             const modalDiv = document.createElement('div')
             modalDiv.classList.add('modal', 'fade')
-            modalDiv.setAttribute('id','myModal')
+            modalDiv.setAttribute('id',`myModal${proposalsCounter}`)//
             modalDiv.setAttribute('role','dialog')
             const modalDiv2 = document.createElement('div')
             modalDiv2.classList.add('modal-dialog')
@@ -136,6 +141,7 @@ const postToAccordion = (data) =>{
             modalBody.innerHTML= `Cast your Vote! You have ${7-localStorage.getItem('votes')} votes remaining.` 
             modalDivBody.append(modalBody)
             //vote button
+            console.log("Vote Button")
             const voteButtonModal = document.createElement('button')
             voteButtonModal.setAttribute('type', 'button')
             voteButtonModal.classList.add('btn', 'btn-default', 'vote-button')
@@ -143,11 +149,10 @@ const postToAccordion = (data) =>{
             voteButtonModal.setAttribute('proposalId', data[counter]['submission_id'])
             voteButtonModal.innerHTML='Vote'
             voteButtonModal.addEventListener('click', (e) =>{
-                e.preventDefault()
                 if(!localStorage.getItem('username')){
                     alert('Please Login to Vote')
                 }else{
-                    const submission_id = (voteButtonModal.getAttribute('proposalId'))-1
+                    const submission_id = (voteButtonModal.getAttribute('proposalId'))
                     console.log(submission_id)
                     castVote(submission_id)
             }
@@ -185,29 +190,30 @@ const postToAccordion = (data) =>{
 }
 
 const castVote = async (proposal_id)=>{
-    console.log(proposal_id)
-    console.log(localStorage.getItem('token'))
     const options = {
         method: "PATCH",
         headers: {
-            'authorization': localStorage.getItem('token'),
-            'Content-Type': 'application/json'
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization': localStorage.getItem('token')
         },
         body: JSON.stringify({
             votes: 1
         })
     }
-    console.log(options)
     try{
         const res= await fetch(`http://localhost:3000/submissions/vote/${proposal_id}`, options)
         if (res.ok){
             const data= await res.json()
-            console.log(data)
+            localStorage.setItem('votes', (data['votes']))
+            alert("Vote Cast")
+            window.location.reload()
         }else{
             throw "Error: http Status Code = " + res.status
         }}
         catch(err){
             console.log(err)
+            alert("No votes remaining")
         }
 }
 
