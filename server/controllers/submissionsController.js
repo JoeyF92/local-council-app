@@ -86,6 +86,8 @@ class SubmissionController {
     }
   }
 
+  //testtest
+
   static async clearVotes(req, res) {
     try {
       const data = await Submissions.clearVotes();
