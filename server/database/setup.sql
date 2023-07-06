@@ -25,7 +25,7 @@ CREATE TABLE voting_submissions (
     photo VARCHAR(200),
     date_time_entry TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
     votes INT DEFAULT 0,
-    user_id INT NOT NULL,
+    user_id INT,
     FOREIGN KEY ("user_id") REFERENCES users("user_id"),
     submission_status VARCHAR(50) DEFAULT 'pending'
 );

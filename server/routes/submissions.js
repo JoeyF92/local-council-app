@@ -16,4 +16,6 @@ submissionRouter.patch("/clearVotes", SubmissionsController.clearVotes);
 submissionRouter.patch("/denyAll", SubmissionsController.denyAll);
 submissionRouter.patch("/:id", SubmissionsController.updateSubmissionStatus);
 
+
 module.exports = submissionRouter;
+

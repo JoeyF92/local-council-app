@@ -1,63 +1,79 @@
+const db = require("../database/connect");
+
 const Submissions = require("../models/Submissions");
 const User = require("../models/User");
 const Token = require("../models/Token");
 
-class SubmissionController {
-  static async getAllSubmissions(req, res) {
-    try {
-      const data = await Submissions.getAllSubmissions();
-      res.status(200).json(data);
-    } catch (error) {
-      res.status(500).json({ error: `Internal Server Error - ${error}` });
-    }
+
+class Submissions {
+  static async getAllSubmissions() {
+    const query = "SELECT * FROM voting_submissions";
+    const { rows } = await db.query(query);
+    return rows;
   }
 
-  static async getSubmissionById(req, res) {
-    const { id } = req.params;
-    try {
-      const submission = await Submissions.getSubmissionById(id);
-      if (submission) {
-        res.status(200).json(submission);
-      } else {
-        res.status(404).json({ error: `Submission not found` });
-      }
-    } catch (error) {
-      res.status(500).json({ error: `Oops something went wrong - ${error}` });
-    }
+  static async getSubmissionById(id) {
+    const query = "SELECT * FROM voting_submissions WHERE submission_id = $1";
+    const { rows } = await db.query(query, [id]);
+    return rows[0];
   }
 
-  static async getSubmissionsByStatus(req, res) {
-    const status = req.params.type;
-    console.log(status);
-    try {
-      const submissions = await Submissions.getSubmissionsByStatus(status);
-      res.status(200).json(submissions);
-    } catch (err) {
-      res.status(404).json({ error: err.message });
-    }
+  static async getSubmissionsByStatus(submission_status) {
+    const query =
+      "SELECT * FROM voting_submissions WHERE submission_status= $1 ORDER BY votes DESC";
+    const { rows } = await db.query(query, [submission_status]);
+    return rows;
   }
 
-  static async createSubmission(req, res) {
-    const submission = req.body;
-    try {
-      const newSubmission = await Submissions.createSubmission(submission);
-      console.log(submission);
-      res.status(201).json(newSubmission);
-    } catch (error) {
-      res.status(500).json({ Error: `Error - ${error}` });
-    }
+  static async createSubmission(submission) {
+    const { title, category, proposal, photo } = submission;
+    const query =
+      "INSERT INTO voting_submissions (title, category, proposal, photo) VALUES ($1, $2, $3, $4) RETURNING *";
+    const values = [title, category, proposal, photo];
+    const { rows } = await db.query(query, values);
+    return rows[0];
   }
 
-  static async updateSubmission(req, res) {
-    try {
-      const id = parseInt(req.params.id);
-      const data = req.body;
-      const result = await Submissions.updateSubmission(id, data);
-      res.status(200).json(result);
-    } catch (err) {
-      res.status(404).json({ error: err.message });
-    }
+  static async updateSubmission(id, submission) {
+    const { title, category, proposal, photo, submission_status } = submission;
+    const query =
+      "UPDATE voting_submissions SET title = $1, category = $2, proposal = $3, photo = $4, submission_status = $5 WHERE submission_id = $6 RETURNING *";
+    const values = [title, category, proposal, photo, submission_status, id];
+    const { rows } = await db.query(query, values);
+    console.log(rows[0]);
+    return rows[0];
   }
+
+
+  static async updateSubmissionStatus(id, action) {
+    const query =
+      "UPDATE voting_submissions SET submission_status = $1 WHERE submission_id = $2 RETURNING *";
+    const values = [action, parseInt(id)];
+    const { rows } = await db.query(query, values);
+    console.log(rows[0]);
+    return rows[0];
+  }
+
+  static async vote(count, id, user_id) {
+    const query = `UPDATE voting_submissions SET votes = votes + $1 WHERE submission_id = $2`;
+    const values = [count, id];
+    const userQuery = `UPDATE users SET votes_used = votes_used + $1 WHERE user_id = $2`;
+    const userValues = [count, user_id];
+    const { rows } = await db.query(query, values);
+    const { userRows } = await db.query(userQuery, userValues);
+    return { submission: rows[0], users: userRows[0] };
+  }
+
+  static async clearVotes() {
+    const query = `UPDATE users SET votes_used = 0`;
+    const { rows } = await db.query(query);
+    return rows;
+  }
+
+  static async denyAll() {
+    const query = `UPDATE voting_submissions SET submission_status = 'denied' WHERE submission_status = 'approved' RETURNING *`;
+    const { rows } = await db.query(query);
+    return rows;
 
   static async updateSubmissionStatus(req, res) {
     try {
@@ -129,4 +145,4 @@ class SubmissionController {
   }
 }
 
-module.exports = SubmissionController;
+module.exports = Submissions;
