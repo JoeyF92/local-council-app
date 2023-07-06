@@ -49,11 +49,14 @@ class Submissions{
 
     static async vote(count, id, user_id){
         const query = `UPDATE voting_submissions SET votes = votes + $1 WHERE submission_id = $2`;
-        const values = [count, id];
+        const values = [count, id+1];
         const userQuery = `UPDATE users SET votes_used = votes_used + $1 WHERE user_id = $2`;
         const userValues = [count, user_id];
+        console.log("here in models")
         const {rows} = await db.query(query, values)
+        console.log(rows[0])
         const {userRows} = await db.query(userQuery,userValues)
+        console.log(userRows[0])
         return {submission: rows[0], users: userRows[0]}
     }
 

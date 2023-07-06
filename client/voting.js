@@ -1,6 +1,8 @@
 // const { createECDH } = require("crypto")
 // const { create } = require("../server/models/User")
 
+//const { vote } = require("../server/models/Submissions")
+
 const carousel = document.querySelector("#myCarousel")
 
 const fetchProposals = async () =>{
@@ -131,10 +133,26 @@ const postToAccordion = (data) =>{
             const modalDivBody = document.createElement('div')
             modalDivBody.classList.add('modal-body')
             const modalBody = document.createElement('p')
-            modalBody.innerHTML= 'Cast your Vote! You have 7 votes remaining.' //change this with a fetch
+            modalBody.innerHTML= `Cast your Vote! You have ${7-localStorage.getItem('votes')} votes remaining.` 
             modalDivBody.append(modalBody)
             //vote button
+            const voteButtonModal = document.createElement('button')
+            voteButtonModal.setAttribute('type', 'button')
+            voteButtonModal.classList.add('btn', 'btn-default', 'vote-button')
+            voteButtonModal.setAttribute('data-dismiss', 'modal')
+            voteButtonModal.setAttribute('proposalId', data[counter]['submission_id'])
+            voteButtonModal.innerHTML='Vote'
+            voteButtonModal.addEventListener('click', (e) =>{
+                e.preventDefault()
+                if(!localStorage.getItem('username')){
+                    alert('Please Login to Vote')
+                }else{
+                    const submission_id = (voteButtonModal.getAttribute('proposalId'))-1
+                    console.log(submission_id)
+                    castVote(submission_id)
+            }
 
+            })
             //
             const modalDivFooter = document.createElement('div')
             modalDivFooter.classList.add('modal-footer')
@@ -143,7 +161,9 @@ const postToAccordion = (data) =>{
             footerButton.classList.add('btn', 'btn-default')
             footerButton.setAttribute('data-dismiss', 'modal')
             footerButton.innerHTML='Back'
-            modalDivFooter.append(footerButton)
+
+
+            modalDivFooter.append(voteButtonModal, footerButton)
             modalDiv3.append(modalDivHeader, modalDivBody, modalDivFooter)
             modalDiv2.append(modalDiv3)
             modalDiv.append(modalDiv2)
@@ -163,5 +183,33 @@ const postToAccordion = (data) =>{
     })
     
 }
+
+const castVote = async (proposal_id)=>{
+    console.log(proposal_id)
+    console.log(localStorage.getItem('token'))
+    const options = {
+        method: "PATCH",
+        headers: {
+            'authorization': localStorage.getItem('token'),
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            votes: 1
+        })
+    }
+    console.log(options)
+    try{
+        const res= await fetch(`http://localhost:3000/submissions/vote/${proposal_id}`, options)
+        if (res.ok){
+            const data= await res.json()
+            console.log(data)
+        }else{
+            throw "Error: http Status Code = " + res.status
+        }}
+        catch(err){
+            console.log(err)
+        }
+}
+
 
 fetchProposals()

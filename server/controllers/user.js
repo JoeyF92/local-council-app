@@ -4,6 +4,7 @@ const User = require("../models/User");
 const Token = require("../models/token");
 
 async function register(req, res) {
+  //check if user is in the database before registering
   try {
     const data = req.body;
     const salt = await bcrypt.genSalt(parseInt(process.env.BCRYPT_SALT_ROUNDS));
@@ -32,8 +33,8 @@ async function login(req, res) {
       // if the user is authenticated, we can assign it a token
       const token = await Token.create(user.id);
       //we can use the authenticated object to see if user is authenticated now, and we can pass in the token too in the response
-
-      res.status(200).json({ authenticated: true, token: token });
+      const voteCount = user["votes_used"]
+      res.status(200).json({ authenticated: true, token: token, voteCount: voteCount, userId: user["id"]});
     }
   } catch (err) {
     res.status(403).json({ error: err.message });

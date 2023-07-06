@@ -7,12 +7,14 @@ class User {
     pass_word,
     user_address,
     is_admin = false,
+    votes_used = 0,
   }) {
     this.id = user_id;
     this.username = username;
     this.pass_word = pass_word;
     this.userAddress = user_address;
     this.isAdmin = is_admin;
+    this.votes_used = votes_used
   }
 
   static async getOneById(id) {
@@ -40,11 +42,13 @@ class User {
   static async create(data) {
     const { username, password, user_address, isAdmin } = data;
     let response = await db.query(
-      "INSERT INTO users (username, pass_word, user_address) VALUES ($1, $2, $3) RETURNING user_id;",
-      [username, password, user_address]
+      "INSERT INTO users (username, pass_word, votes_used) VALUES ($1, $2, $3) RETURNING user_id;",
+      [username, password, 0]
     );
+    console.log(response)
     const newId = response.rows[0].user_id;
     const newUser = await User.getOneById(newId);
+    console.log(newUser)
     return newUser;
   }
 }

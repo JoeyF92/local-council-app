@@ -20,8 +20,7 @@ const loggedIn = ()=>{
             const res = await fetch("http://localhost:3000/users/logout", options)
             const data = await res.json();
             if(res.status==202){
-                localStorage.removeItem('token')
-                localStorage.removeItem('username')
+                localStorage.clear()
                 profile.innerText = `Profile`
                 window.location.href="index.html"
             }else{
