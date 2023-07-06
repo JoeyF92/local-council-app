@@ -2,20 +2,38 @@
   color: #e0b1a9;
 }
 
+body {
+  background-color: #e0b1a9;
+}
+
 .container {
   display: flex;
   flex-direction: row;
 }
 
 .main-image {
-  width: 300px; /* Adjust the width as desired */
-  height: 300px; /* Adjust the height as desired */
-  display: flex;
+  text-align: center;
+
+  margin: auto;
+  display: block;
+
   align-items: center;
   justify-content: center;
 }
 
+#app-name {
+  text-align: center;
+}
+
+#site-info {
+  padding-top: 2rem;
+  width: 60vw;
+  margin: auto;
+}
+
 .button-container {
+  margin: auto;
+  width: 90vw;
   display: flex;
   justify-content: space-between;
   margin-top: 20px;
@@ -23,21 +41,25 @@
 
 .button-container button {
   display: flex;
+  width: 24rem;
   flex-direction: column;
   align-items: center;
   border-radius: 50%;
   overflow: hidden;
+  border: none;
 }
 
 .button-container button img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+  width: 120%;
+  height: 120%;
+  object-fit: fill;
 }
 
 .button-container button span {
-  margin-top: 10px;
   text-align: center;
+  z-index: 10012;
+  position: absolute;
+  background-color: white;
 }
 .carousel-inner .item img {
   width: 100%;
