@@ -27,8 +27,7 @@ You can now access the liveserver locally!
 ## Technologies
 We used:
 - Javascript
-- Node.js
-  Node packages included:
+- Node.js Modules:
   -bcrypt
   -jest
   -express
