@@ -27,7 +27,11 @@ You can now access the liveserver locally!
 ## Technologies
 We used:
 - Javascript
-- Node.js packages included:
+- Node.js
+- CSS
+- HTML
+
+Node packages included:
   +bcrypt
   +jest
   +express
@@ -37,8 +41,6 @@ We used:
   +coverage
   +uuid
   +path
-- CSS
-- HTML
 
 ## Process
 The backend functionality was completed and tested to a high degree, with versatility in function creation allowing for future front end features to be written without additions to the backend.
