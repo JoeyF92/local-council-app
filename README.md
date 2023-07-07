@@ -9,7 +9,7 @@ Created by Windows-Wallies: [Joe Fountain](https://github.com/JoeyF92), [Abdul S
 - [Technology](#Technologies)
 - [Process](#Process)
 - [Features](#Key-Features)
-- [Known bugs](#Bugs)
+- [Bugs](#Bugs)
 
 
 ## Description
