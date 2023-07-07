@@ -5,7 +5,7 @@ Created by Windows-Wallies: [Joe Fountain](https://github.com/JoeyF92), [Abdul S
 ## Table of Contents
 
 - [Description](#Description)
-- [Installation](#Installaltion-and-Usage)
+- [Installation](#Installation-and-Usage)
 - [Technology](#Technologies)
 - [Process](#Process)
 - [Features](#Key-Features)
