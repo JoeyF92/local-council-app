@@ -49,9 +49,10 @@ const populateTable = (data, status) => {
   if (data != "") {
     const submissionsDiv = document.querySelector("#submissions-table");
     submissionsDiv.innerHTML = "";
-    //create table
+
+    // Create table
     const table = document.createElement("table");
-    table.classList.add("category-table");
+    table.classList.add("admin-category-table");
 
     const tableHeaders = [
       "Category",
@@ -63,7 +64,8 @@ const populateTable = (data, status) => {
       "Vote Count",
       "Action",
     ];
-    //populate the tables headers
+
+    // Populate the table headers
     const headerRow = document.createElement("tr");
     for (const headerText of tableHeaders) {
       const th = document.createElement("th");
@@ -109,7 +111,6 @@ const populateTable = (data, status) => {
 
       // Date Added column
       const dateAddedCell = document.createElement("td");
-
       dateAddedCell.textContent = new Date(date_time_entry).toLocaleString();
       dataRow.appendChild(dateAddedCell);
 
@@ -121,7 +122,7 @@ const populateTable = (data, status) => {
       imageCell.appendChild(image);
       dataRow.appendChild(imageCell);
 
-      //Vote column
+      // Vote column
       const voteCell = document.createElement("td");
       voteCell.textContent = votes;
       dataRow.appendChild(voteCell);
@@ -132,6 +133,7 @@ const populateTable = (data, status) => {
       if (status === "pending" || status === "denied") {
         const approveButton = document.createElement("button");
         approveButton.textContent = "Approve";
+        approveButton.classList.add("admin-approve-button");
         approveButton.addEventListener("click", () =>
           decisionHandle("approved", submission_id)
         );
@@ -141,15 +143,17 @@ const populateTable = (data, status) => {
       if (status === "pending") {
         const denyButton = document.createElement("button");
         denyButton.textContent = "Deny";
+        denyButton.classList.add("admin-deny-button");
         denyButton.addEventListener("click", () =>
           decisionHandle("denied", submission_id)
         );
         actionCell.appendChild(denyButton);
       }
 
-      //edit button
+      // Edit button
       const editButton = document.createElement("button");
       editButton.textContent = "Edit";
+      editButton.classList.add("admin-edit-button");
       editButton.addEventListener("click", () =>
         showEditForm(item, submission_id)
       );
@@ -160,13 +164,13 @@ const populateTable = (data, status) => {
       table.appendChild(dataRow);
     }
 
-    //create button for mass moving submissions to denied at the end of the month
+    // Create button for mass moving submissions to denied at the end of the month
     submissionsDiv.appendChild(table);
     if (status == "approved") {
       const resetDivP = document.createElement("div");
       const resetDivButton = document.createElement("div");
-      resetDivP.classList = "resetdiv";
-      resetDivButton.classList = "resetdiv";
+      resetDivP.classList.add("admin-reset-div");
+      resetDivButton.classList.add("admin-reset-div");
       const p = document.createElement("p");
       p.textContent =
         "Click to move all remaining submissions to denied and reset month";
@@ -204,7 +208,6 @@ const decisionHandle = async (action, id) => {
     console.log(data.error);
   }
 };
-
 const showEditForm = (item, id) => {
   const formContainer = document.querySelector("#form-container");
 
@@ -213,7 +216,7 @@ const showEditForm = (item, id) => {
 
   // Create the form
   const form = document.createElement("form");
-  //   form.method = "post";
+  form.id = "edit-form";
 
   // Title input
   const titleLabel = document.createElement("label");
@@ -223,6 +226,7 @@ const showEditForm = (item, id) => {
   titleInput.name = "title";
   titleInput.required = true;
   titleInput.value = `${item.title}`;
+  titleInput.classList.add("form-input");
 
   form.appendChild(titleLabel);
   form.appendChild(titleInput);
@@ -236,6 +240,8 @@ const showEditForm = (item, id) => {
   categoryInput.name = "category";
   categoryInput.required = true;
   categoryInput.value = `${item.category}`;
+  categoryInput.classList.add("form-input");
+
   form.appendChild(categoryLabel);
   form.appendChild(categoryInput);
   form.appendChild(document.createElement("br"));
@@ -247,6 +253,8 @@ const showEditForm = (item, id) => {
   proposalTextarea.name = "proposal";
   proposalTextarea.required = true;
   proposalTextarea.value = `${item.proposal}`;
+  proposalTextarea.classList.add("form-textarea");
+
   form.appendChild(proposalLabel);
   form.appendChild(document.createElement("br"));
   form.appendChild(proposalTextarea);
@@ -260,6 +268,8 @@ const showEditForm = (item, id) => {
   photoInput.name = "photo";
   photoInput.required = true;
   photoInput.value = `${item.photo}`;
+  photoInput.classList.add("form-input");
+
   form.appendChild(photoLabel);
   form.appendChild(photoInput);
   form.appendChild(document.createElement("br"));
@@ -270,6 +280,7 @@ const showEditForm = (item, id) => {
   const statusSelect = document.createElement("select");
   statusSelect.name = "status";
   statusSelect.status = `Complete`;
+  statusSelect.classList.add("form-select");
 
   const statusOptions = [
     { label: "Pending", value: "pending" },
@@ -296,6 +307,7 @@ const showEditForm = (item, id) => {
   const submitButton = document.createElement("input");
   submitButton.type = "submit";
   submitButton.value = "Submit";
+  submitButton.classList.add("form-button");
   form.appendChild(submitButton);
 
   form.addEventListener("submit", (e) => submitEdit(e, id));
@@ -314,39 +326,6 @@ const showEditForm = (item, id) => {
   formContainer.appendChild(closeButton);
   formContainer.appendChild(form);
   formContainer.hidden = false;
-};
-
-const submitEdit = async (e, id) => {
-  e.preventDefault();
-  const formContainer = document.querySelector("#form-container");
-
-  const form = e.target;
-  const options = {
-    method: "PUT",
-    headers: {
-      Accept: "application/json",
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      title: form.elements.title.value,
-      category: form.elements.category.value,
-      proposal: form.elements.proposal.value,
-      photo: form.elements.photo.value,
-      submission_status: form.elements.status.value,
-    }),
-  };
-  const response = await fetch(
-    `http://localhost:3000/submissions/${id}`,
-    options
-  );
-  const data = await response.json();
-  if (response.status == 200) {
-    console.log(data);
-    formContainer.hidden = true;
-    location.reload();
-  } else {
-    console.log(data.error);
-  }
 };
 
 const moveAndReset = async () => {

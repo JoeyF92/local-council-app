@@ -152,6 +152,7 @@ const postToAccordion = (data) =>{
                     castVote(submission_id)
             }
 
+
             })
             //
             const modalDivFooter = document.createElement('div')
