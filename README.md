@@ -32,15 +32,15 @@ We used:
 - HTML
 
 Node packages included:
-  +bcrypt
-  +jest
-  +express
-  +cors
-  +pg
-  +fs
-  +coverage
-  +uuid
-  +path
+  + bcrypt
+  + jest
+  + express
+  + cors
+  + pg
+  + fs
+  + coverage
+  + uuid
+  + path
 
 ## Process
 The backend functionality was completed and tested to a high degree, with versatility in function creation allowing for future front end features to be written without additions to the backend.
