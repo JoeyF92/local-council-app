@@ -1,7 +1,7 @@
 const bcrypt = require("bcrypt");
 
 const User = require("../models/User");
-const Token = require("../models/token");
+const Token = require("../models/Token");
 
 async function register(req, res) {
   try {
@@ -25,7 +25,7 @@ async function login(req, res) {
       data.password,
       user["pass_word"]
     );
-
+    
     if (!authenticated) {
       throw new Error("Incorrect credentials.");
     } else {
@@ -33,7 +33,10 @@ async function login(req, res) {
       const token = await Token.create(user.id);
       //we can use the authenticated object to see if user is authenticated now, and we can pass in the token too in the response
 
-      res.status(200).json({ authenticated: true, token: token });
+
+      res.status(200).json({ authenticated: true, token: token, voteCount: user.votes_used, userId: user.id});
+
+
     }
   } catch (err) {
     res.status(403).json({ error: err.message });

@@ -1,7 +1,7 @@
 const express = require("express");
 const cors = require("cors");
-
 const logRoutes = require("./middleware/logger");
+const submissionRouter = require("./routes/submissions");
 
 const userRouter = require("./routers/user");
 //add other routers here:
@@ -10,7 +10,7 @@ const app = express();
 
 app.use(cors());
 app.use(express.json());
-//app.use(logRoutes);
+app.use(logRoutes);
 
 app.get("/", (req, res) => {
   res.json({
@@ -20,6 +20,7 @@ app.get("/", (req, res) => {
   });
 });
 
+app.use("/submissions", submissionRouter);
 app.use("/users", userRouter);
 // add other paths here
 

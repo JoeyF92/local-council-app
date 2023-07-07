@@ -1,35 +1,119 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Indie+Flower&family=Montserrat:wght@200;300;400;600;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+    />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+    <script src="nav.js" defer></script>
+    <script src="proposal.js" defer></script>
+    <link rel="stylesheet" type="text/css" href="./assets/styles.css" />
     <title>Proposals</title>
-</head>
-<body>
+  </head>
+  <body>
     <nav class="navbar navbar-default">
-        <div class="container-fluid">
-          <div class="navbar-header">
-            <a class="navbar-brand" href="index.html">Florin Council</a>
-          </div>
-          <ul class="nav navbar-nav navbar-right">
-            <li><a href="#">Register</a></li>
-            <li><a href="#"><span class="glyphicon glyphicon-user"></span>Profile</a></li>
-          </ul>
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="index.html">Florin Council</a>
         </div>
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="voting.html">Vote</a></li>
+          <li><a href="progress.html">In-progress</a></li>
+          <li><a href="stories.html">Stories</a></li>
+          <li><a id="logoutButton" href="#">Login</a></li>
+          <li>
+            <a id="profile" href="#"
+              ><span class="glyphicon glyphicon-user"></span>Profile</a
+            >
+          </li>
+        </ul>
+      </div>
     </nav>
-    <form action="/action_page.php">
-        <h2>Your Proposal</h2>
-        <div class="form-group">
-            <label for="title">Title</label>
-            <input type="text" class="form-control" id="title">
+
+    <section id="page-header">
+      <div class="header-container">
+        <h1>Make a suggestion</h1>
+        <p class="council-text">
+          <strong>Have your voice heard</strong>
+        </p>
+
+        <p class="header-description">
+          Here's your chance to make a proposal for an improvement you'd like to
+          see in your area, for the community to vote on.
+        </p>
+      </div>
+    </section>
+
+    <div id="new-form-container">
+      <form id="proposal-form">
+        <!-- Title input -->
+        <label for="title">Title:</label>
+        <input
+          class="form-input"
+          type="text"
+          id="title"
+          name="title"
+          class="form-input"
+          required
+        />
+
+        <br />
+
+        <!-- Category input -->
+        <label for="category">Category:</label>
+        <input
+          type="text"
+          id="category"
+          name="category"
+          class="form-input"
+          required
+        />
+
+        <br />
+
+        <!-- Proposal input -->
+        <label for="proposal">Proposal:</label>
+        <textarea
+          id="proposal"
+          name="proposal"
+          class="form-text-input"
+          required
+        ></textarea>
+
+        <br />
+
+        <!-- Photo input -->
+        <label for="photo">Photo URL:</label>
+        <input type="url" id="photo" name="photo" class="form-input" required />
+
+        <br />
+
+        <!-- Submit button -->
+        <input type="submit" value="Submit" class="form-button" />
+      </form>
+    </div>
+
+    <footer class="footer">
+      <div class="footer-content">
+        <div class="footer-left">
+          <span>Your Vote By Florin Council</span>
         </div>
-        <div>
-            <label for=""></label>
+        <div class="footer-right">
+          <span>Designed by Windows Wallies</span>
         </div>
-    </form>
-    
-</body>
+      </div>
+    </footer>
+  </body>
 </html>

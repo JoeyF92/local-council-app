@@ -1,28 +1,95 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>Admin</title>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-  <script src="" defer></script>
-  <link rel="stylesheet" type="text/css" href="styles.css">
-</head>
-<body>
+  <head>
+    <title>Admin</title>
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+    />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src="admin.js" defer></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Indie+Flower&family=Montserrat:wght@200;300;400;600;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" type="text/css" href="./assets/styles.css" />
+  </head>
+  <body>
     <nav class="navbar navbar-default">
-        <div class="container-fluid">
-          <div class="navbar-header">
-            <a class="navbar-brand" href="index.html">Florin Council</a>
-          </div>
-          <ul class="nav navbar-nav navbar-right">
-            <li><a href="#">Register</a></li>
-            <li><a href="#"><span class="glyphicon glyphicon-user"></span>Profile</a></li>
-          </ul>
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="index.html">Florin Council</a>
         </div>
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="#">Register</a></li>
+          <li>
+            <a href="#"
+              ><span class="glyphicon glyphicon-user"></span>Profile</a
+            >
+          </li>
+        </ul>
+      </div>
     </nav>
 
+    <section id="page-header">
+      <div class="header-container">
+        <h1>Welcome to Florin Council Admin Page</h1>
+        <p>Shape the Future of Our Community</p>
+        <div class="divider"></div>
+        <p class="header-description">
+          Here you have the power to shape our community by reviewing new
+          submissions and making decisions that will impact the future. Your
+          role is crucial in ensuring that only the most promising proposals
+          proceed to the public voting stage. <br />
+          As you assess each submission, carefully consider its alignment with
+          our council's values and objectives. Remember, any approved projects
+          will be open for public voting, so it's essential to adhere to the
+          council's format when making edits or modifications. <br />
+          Additionally, you can access the current results for the month,
+          enabling informed decision-making and helping prioritize submissions
+          that have gained public support. Your dedication and commitment to
+          this process play a vital role in transforming ideas into reality and
+          making our community an even better place to live. Thank you for your
+          invaluable service!
+        </p>
+      </div>
+    </section>
+
+    <section id="main">
+      <div id="status-buttons">
+        <ul>
+          <li><a href="#" id="pending-table">Review New Submissions</a></li>
+          <li>
+            <a href="#" id="results-table"
+              >View Current Results For This Month</a
+            >
+          </li>
+          <li><a href="#" id="progress-table">View In-Progress Projects</a></li>
+          <li><a href="#" id="complete-table">View Successful Projects</a></li>
+          <li><a href="#" id="denied-table">View Denied Requests</a></li>
+        </ul>
+      </div>
+      <div id="form-container" hidden></div>
+      <div id="submissions-table"></div>
+    </section>
+
+    <footer class="footer">
+      <div class="footer-content">
+        <div class="footer-left">
+          <span>Your Vote By Florin Council</span>
+        </div>
+        <div class="footer-right">
+          <span>Designed by Windows Wallies</span>
+        </div>
+      </div>
+    </footer>
+
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
-</body>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+      crossorigin="anonymous"
+    ></script>
+  </body>
 </html>
-  

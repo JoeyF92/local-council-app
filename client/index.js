@@ -1,10 +1,9 @@
+// const nav = document.querySelector("#navbar-placeholder")
+// nav.load(nav.html)
+
 document.querySelector('#voting').addEventListener('click', (e) =>{
     e.preventDefault()
-    if(localStorage.getItem('token')){
-        window.location.href="voting.html"
-    }else{
-        window.location.href="login.html"
-    }
+    window.location.href="voting.html"
 })
 document.querySelector('#inProgress').addEventListener('click', (e) =>{
     e.preventDefault()
@@ -16,12 +15,11 @@ document.querySelector('#successStories').addEventListener('click', (e) =>{
 })
 document.querySelector('#profile').addEventListener('click', (e) =>{
     e.preventDefault()
-    if(localStorage.getItem('token')){
+    if(localStorage.getItem('username')){
         alert("You are logged in!")
     }else{
         window.location.href="login.html"
     }
     
 })
-
 
