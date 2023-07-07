@@ -64,7 +64,7 @@ const postToCarousel = (data)=>{
             captionDiv.className="carousel-caption"
             title.innerHTML = `Proposal ${proposal}`
             p.innerHTML=data[counter]['title']
-            p.setAttribute('style','color: #F7FF00')
+            //p.setAttribute('style','color: #F7FF00')
             captionDiv.append(title)
             captionDiv.append(p)
             imageDiv.append(captionDiv)

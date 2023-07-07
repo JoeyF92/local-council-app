@@ -64,7 +64,7 @@ const postToCarousel = (data)=>{
             captionDiv.className="carousel-caption"
             title.innerHTML = `Proposal ${proposal}`
             p.innerHTML=data[counter]['title']
-            p.setAttribute('style','color: #F7FF00')
+            //p.setAttribute('style','color: #F7FF00')
             captionDiv.append(title)
             captionDiv.append(p)
             imageDiv.append(captionDiv)
@@ -106,15 +106,21 @@ const postToAccordion = (data) =>{
             }else{
                 infoDiv.classList.add('panel-collapse', 'collapse')
             }
+            const categoryDiv = document.createElement('div')
             infoBodyDiv.classList.add('panel-body')
             infoBodyDiv.innerHTML=data[counter]['proposal']
+            infoBodyDiv.append(document.createElement('br'))
+            infoBodyDiv.append(document.createElement('br'))
+            categoryDiv.innerHTML=`Category: ${data[counter]['category']}`
+            infoBodyDiv.append(categoryDiv)
             //create vote button with modal
             const voteButton = document.createElement('button')
             voteButton.classList.add('btn', 'btn-info', 'btn-lg', 'btn-center')
             voteButton.setAttribute('type', 'button')
+            voteButton.setAttribute('style','color: #F7FF00')
             voteButton.setAttribute('data-toggle',"modal")
             voteButton.setAttribute('data-target',`#myModal${proposalsCounter}`)//
-            voteButton.innerHTML = `Vote ${proposalsCounter}`
+            voteButton.innerHTML = `Vote`
             //modal content
             const modalDiv = document.createElement('div')
             modalDiv.classList.add('modal', 'fade')
