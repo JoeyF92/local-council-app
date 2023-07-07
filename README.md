@@ -2,6 +2,15 @@
 
 Created by Windows-Wallies: [Joe Fountain](https://github.com/JoeyF92), [Abdul Salim](https://github.com/salim1704) and [Hasancan Cifci](https://github.com/hasancan99), for 2nd Project in the LaFosse Academy programe.
 
+## Table of Contents
+
+- [Description](#Description)
+- [Installation](#Installaltion-and-Usage)
+- [Technology](#Technologies)
+- [Process](#Process)
+- [Features](#Key-Features)
+- [Known bugs](#Bugs)
+
 
 ## Description
 
