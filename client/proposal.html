@@ -19,6 +19,7 @@
 
     <script src="nav.js" defer></script>
     <script src="proposal.js" defer></script>
+    <link rel="stylesheet" type="text/css" href="./assets/styles.css" />
     <title>Proposals</title>
   </head>
   <body>
@@ -38,35 +39,78 @@
       </div>
     </nav>
 
-    <div id="form-container">
+    <section id="page-header">
+      <div class="header-container">
+        <h1>Make a suggestion</h1>
+        <p class="council-text">
+          <strong>Have your voice heard</strong>
+        </p>
+
+        <p class="header-description">
+          Here's your chance to make a proposal for an improvement you'd like to
+          see in your area, for the community to vote on.
+        </p>
+      </div>
+    </section>
+
+    <div id="new-form-container">
       <form id="proposal-form">
         <!-- Title input -->
         <label for="title">Title:</label>
-        <input type="text" id="title" name="title" required />
+        <input
+          class="form-input"
+          type="text"
+          id="title"
+          name="title"
+          class="form-input"
+          required
+        />
 
         <br />
 
         <!-- Category input -->
         <label for="category">Category:</label>
-        <input type="text" id="category" name="category" required />
+        <input
+          type="text"
+          id="category"
+          name="category"
+          class="form-input"
+          required
+        />
 
         <br />
 
         <!-- Proposal input -->
         <label for="proposal">Proposal:</label>
-        <textarea id="proposal" name="proposal" required></textarea>
+        <textarea
+          id="proposal"
+          name="proposal"
+          class="form-text-input"
+          required
+        ></textarea>
 
         <br />
 
         <!-- Photo input -->
         <label for="photo">Photo URL:</label>
-        <input type="url" id="photo" name="photo" required />
+        <input type="url" id="photo" name="photo" class="form-input" required />
 
         <br />
 
         <!-- Submit button -->
-        <input type="submit" value="Submit" />
+        <input type="submit" value="Submit" class="form-button" />
       </form>
     </div>
+
+    <footer class="footer">
+      <div class="footer-content">
+        <div class="footer-left">
+          <span>Your Vote By Florin Council</span>
+        </div>
+        <div class="footer-right">
+          <span>Designed by Windows Wallies</span>
+        </div>
+      </div>
+    </footer>
   </body>
 </html>

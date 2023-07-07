@@ -1,6 +1,8 @@
-document.querySelector("#form-container").addEventListener("submit", (e) => {
-  submitProposal(e);
-});
+document
+  .querySelector("#new-form-container")
+  .addEventListener("submit", (e) => {
+    submitProposal(e);
+  });
 
 const submitProposal = async (e, id) => {
   e.preventDefault();
