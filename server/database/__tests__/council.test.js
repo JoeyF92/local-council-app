@@ -1,6 +1,8 @@
 const Submissions = require("../../models/Submissions");
 const Token = require('../../models/Token');
 const authenticator = require('../../middleware/authenticator')
+const User = require('../../models/User');
+const db = require('../connect');
 
 describe("Jest Test", () => {
   it("Should work", () => {
@@ -30,25 +32,60 @@ describe("api server", () => {
   });
 
   describe("Login functionality", () => {
-    let userID;
-
-    it('Should create a new user', async () => {
-      const newUser = {
-        username: 'testuser',
-        pass_word: 'testpassword',
-        votes_used: 5
-      };
-  
-      const response = await request(app)
-        .post('/users/register')
-        .send(newUser)
-        .expect(201);
-  
-      const {user_id} = response.body;
-      userID = user_id;
-      expect(response.body).toMatchObject(newUser);
+      let userId;
+    
+      beforeEach(async () => {
+        // Create a user for testing
+        const newUser = {
+          username: 'testuser',
+          password: 'testpassword',
+          user_address: 'Test Address',
+          isAdmin: false,
+        };
+    
+        const response = await User.create(newUser);
+        userId = response.id;
+      });
+    
+      afterEach(async () => {
+        // Clean up the user after each test
+        const query = 'DELETE FROM users WHERE user_id = $1';
+        await db.query(query, [userId]);
+      });
+    
+      it('should retrieve a user by ID', async () => {
+        const user = await User.getOneById(userId);
+        expect(user).toBeDefined();
+        expect(user.id).toBe(userId);
+      });
+    
+      it('should throw an error if user is not found', async () => {
+        await expect(User.getOneById(999)).rejects.toThrowError('Unable to locate user.');
+      });
+    
+      it('should retrieve a user by username', async () => {
+        const user = await User.getOneByUsername('testuser');
+        expect(user).toBeDefined();
+        expect(user.username).toBe('testuser');
+      });
+    
+      it('should throw an error if user is not found', async () => {
+        await expect(User.getOneByUsername('nonexistentuser')).rejects.toThrowError('Unable to locate user.');
+      });
+    
+      it('should create a new user', async () => {
+        const newUser = {
+          username: 'newuser',
+          password: 'newpassword',
+          user_address: 'New Address',
+          isAdmin: true,
+        };
+    
+        const createdUser = await User.create(newUser);
+        expect(createdUser).toBeDefined();
+        expect(createdUser.username).toBe('newuser');
+      });
     });
-  
   });
     //further log in tests to follow
   describe("General app functionality", () => {
@@ -170,7 +207,6 @@ it('Should vote for a submission', async () => {
   // Assert that the response contains the updated submission and user information
   expect(response.body).toHaveProperty('votes', voteCount);
 });
-});
 
 describe('Authenticator Middleware', () => {
   it('should allow access for valid token', async () => {
@@ -259,4 +295,4 @@ describe('Authenticator Middleware', () => {
     expect(res.status).toHaveBeenCalledWith(403);
     expect(res.json).toHaveBeenCalledWith({ error: "User's token doesnt match server" });
   });
-});
+})
