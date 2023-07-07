@@ -64,6 +64,8 @@ class SubmissionController {
     try {
       const id = parseInt(req.params.id);
       const data = req.body;
+      console.log(data);
+      console.log("hi");
       const result = await Submissions.updateSubmission(id, data);
       res.status(200).json(result);
     } catch (err) {
@@ -81,27 +83,27 @@ class SubmissionController {
       res.status(404).json({ error: "Failed to update status" });
     }
   }
-  
-  static async vote(req, res){
+
+  static async vote(req, res) {
     const id = parseInt(req.params.id);
     const count = parseInt(req.body.votes);
     try {
-        const token = req.headers.authorization;
-        const tokenData = await Token.getOneByToken(token)
-        const user_id = tokenData['user_id']
-        const user = await User.getOneById(user_id)
-    if(user.votes_used + count > 7) {
-      console.log("Can no longer Vote")
-        throw new Error('Exceeded maximum votes allowed');
-    }else{
-        const updatedSubmission = await Submissions.vote(count, id,  user_id);
+      const token = req.headers.authorization;
+      const tokenData = await Token.getOneByToken(token);
+      const user_id = tokenData["user_id"];
+      const user = await User.getOneById(user_id);
+      if (user.votes_used + count > 7) {
+        console.log("Can no longer Vote");
+        throw new Error("Exceeded maximum votes allowed");
+      } else {
+        const updatedSubmission = await Submissions.vote(count, id, user_id);
         res.json(updatedSubmission);
+      }
+    } catch (err) {
+      res.status(500).json({ error: "Failed to vote for the submission" });
     }
-    }catch (err) {
-    res.status(500).json({ error: 'Failed to vote for the submission' });
-    }
-}
-  
+  }
+
   static async clearVotes(req, res) {
     try {
       const data = await Submissions.clearVotes();
