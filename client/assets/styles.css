@@ -175,7 +175,21 @@ body {
   transform: translateY(1px);
 }
 
+.login-wrap {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  margin: auto;
+}
 /* admin-edit form styles*/
+#new-form-container {
+  display: flexbox;
+  margin: auto;
+  text-align: center;
+  padding: 20px;
+  width: 400px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
 
 #form-container {
   display: flexbox;
@@ -243,7 +257,7 @@ form label {
 
 /* Style for form submit button */
 .form-button {
-  background-color: #4caf50;
+  background-color: #f6ff0057;
   color: white;
   padding: 10px 16px;
   border: none;
@@ -252,7 +266,7 @@ form label {
 }
 
 .form-button:hover {
-  background-color: #45a049;
+  background-color: #a6ac0557;
 }
 
 .close-button {
@@ -433,4 +447,28 @@ form label {
 .admin-category-table .admin-approve-button:hover,
 .admin-category-table .admin-deny-button:hover {
   background-color: #e0b1a9;
+}
+
+.footer {
+  padding: 20px;
+  text-align: center;
+  margin-top: 15rem;
+}
+
+.footer-content {
+  display: flex;
+  justify-content: space-between;
+}
+
+.footer span {
+  font-size: 14px;
+  color: #888;
+}
+
+.footer-left {
+  margin-right: 10px;
+}
+
+.footer-right {
+  margin-left: 10px;
 }
