@@ -106,6 +106,11 @@ const postToAccordion = (data) => {
       }
       infoBodyDiv.classList.add("panel-body");
       infoBodyDiv.innerHTML = data[counter]["proposal"];
+      const categoryDiv = document.createElement("div");
+      infoBodyDiv.append(document.createElement("br"));
+      infoBodyDiv.append(document.createElement("br"));
+      categoryDiv.innerHTML = `Category: ${data[counter]["category"]}`;
+      infoBodyDiv.append(categoryDiv);
       //create vote button with modal
       const voteButton = document.createElement("button");
       voteButton.classList.add("btn", "btn-info", "btn-lg", "btn-center");

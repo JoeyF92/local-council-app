@@ -11,11 +11,12 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Indie+Flower&family=Montserrat:wght@200;300;400;600;800&display=swap"
       rel="stylesheet"
     />
-
     <link rel="stylesheet" href="assets/styles.css" />
     <script src="nav.js" defer></script>
     <script src="voting.js" defer></script>
@@ -37,9 +38,20 @@
         </ul>
       </div>
     </nav>
-    <div>
-      <h1 class="text-center">Vote</h1>
-    </div>
+
+    <section id="page-header">
+      <div class="header-container">
+        <h1>Voting Page</h1>
+        <p class="council-text">
+          <strong>Get ready to cast your votes</strong>
+        </p>
+
+        <p class="header-description">
+          Check out this months proposals from your community and vote for what
+          changes you want to make happen.
+        </p>
+      </div>
+    </section>
 
     <div id="myCarousel" class="carousel slide" data-ride="carousel">
       <!-- Indicators -->
@@ -76,7 +88,7 @@
         <span class="sr-only">Next</span>
       </a>
     </div>
-    <h2>This Months Proposals:</h2>
+    <h2 id="second-heading">This Months Proposals:</h2>
     <div class="panel-group" id="accordion">
       <!-- <div class="panel panel-default">
         <div class="panel-heading">

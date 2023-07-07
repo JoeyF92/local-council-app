@@ -10,6 +10,10 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <script src="index.js" defer></script>
     <script src="nav.js" defer></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Indie+Flower&family=Montserrat:wght@200;300;400;600;800&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" type="text/css" href="./assets/styles.css" />
   </head>
   <body>
@@ -29,16 +33,24 @@
       </div>
     </nav>
 
-    <div id="navbar-placeholder"></div>
-    <div class="main-image">
-      <img src="assets/town-logo.png" alt="Center Image" />
+    <!-- <div id="index-header">
+      <h1> Florin Vote </h1>
+    </div> -->
+
     </div>
 
-    <div id="site-info">
-      <h3 id="app-name">UrbanVote</h3>
-      <p>
-        Welcome to our local council app! Here, you have the power to make a
-        difference in our community. Every month, we present a list of proposals
+    <!-- <div id="navbar-placeholder"></div>
+    <div class="main-image">
+      <img src="assets/town-logo.png" alt="Center Image" />
+    </div> -->
+
+    <section id="page-header">
+      <div class="header-container">
+        <h1>Welcome to YourVote </h1>
+        <p class="council-text"><strong>Welcome to our local council app! Here, you have the power to make a difference in our community.</strong></p>
+        <div class="divider"></div>
+        <p class="header-description">
+          Every month, we present a list of proposals
         that aim to improve our area. You have 7 votes at your disposal to cast
         on the proposals that resonate with you the most. Feel free to
         distribute your votes among multiple proposals or concentrate them on a
@@ -51,21 +63,25 @@
         Join us in shaping the future of our local area through dotmocracy-style
         voting and witnessing the transformative power of your participation.
         Together, we can create a vibrant and thriving community we are proud to
-        call home.
-      </p>
-    </div>
+        call home.</p>
+        <a class="index-button" href="proposal.html" role="button">Write a proposal!</a>
+      </div>
+    </section>
+
+ 
+
 
     <div class="container">
       <div class="button-container">
-        <button id="voting">
+        <button id="voting" class="index-button">
           <img src="assets/voting.jpg" alt="Image 1" />
           <span>Voting</span>
         </button>
-        <button id="inProgress">
+        <button id="inProgress" class="index-button">
           <img src="assets/community-road-repairs.jpg" alt="Image 2" />
           <span>In Progress</span>
         </button>
-        <button id="successStories">
+        <button id="successStories" class="index-button">
           <img src="assets/community-children-gardening.jpeg" alt="Image 3" />
           <span>Success Stories</span>
         </button>

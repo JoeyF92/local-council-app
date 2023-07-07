@@ -2,8 +2,17 @@
   color: #e0b1a9;
 }
 
+html {
+  font-family: "Montserrat", sans-serif;
+}
+
 body {
   background-color: #e0b1a9;
+  font-family: "Montserrat", sans-serif;
+}
+
+.council-text {
+  font-family: "Indie Flower", cursive;
 }
 
 .container {
@@ -29,6 +38,20 @@ body {
   padding-top: 2rem;
   width: 60vw;
   margin: auto;
+  padding-top: 1rem;
+}
+
+#site-info > p {
+  text-align: center;
+}
+
+.carousel-control.left,
+.carousel-control.right {
+  background-image: none !important;
+  filter: none !important;
+}
+.carousel-control:hover {
+  opacity: 3.5;
 }
 
 .button-container {
@@ -40,26 +63,56 @@ body {
 }
 
 .button-container button {
-  display: flex;
+  position: relative;
   width: 24rem;
-  flex-direction: column;
-  align-items: center;
+  height: 24rem;
   border-radius: 50%;
-  overflow: hidden;
   border: none;
+  overflow: hidden;
+  background-color: #f2f2f2;
+  transition: background-color 0.3s;
+  cursor: pointer;
+}
+
+.button-container button:hover {
+  background-color: #e6e6e6;
+}
+
+.button-container button:hover {
+  transform: scale(1.05); /* Apply a scale transformation on hover */
 }
 
 .button-container button img {
   width: 120%;
   height: 120%;
   object-fit: fill;
+  object-position: center center;
 }
 
 .button-container button span {
-  text-align: center;
-  z-index: 10012;
   position: absolute;
-  background-color: white;
+  bottom: 20px;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  width: 100%;
+  padding: 10px;
+  text-align: center;
+  background-color: rgba(255, 255, 255, 0.9);
+  border-radius: 4px;
+  font-weight: bold;
+  color: #333;
+  transition: background-color 0.3s;
+}
+
+.button-container button:hover span {
+  background-color: #f2f2f2;
+}
+
+#voting,
+#inProgress,
+#successStories {
+  padding: 0;
 }
 .carousel-inner .item img {
   width: 100%;
@@ -67,7 +120,62 @@ body {
   object-fit: scale-down; /*can also use cover to have a fully covered and stretched carousel*/
 }
 
-/* Admin styles*/
+.carousel-control.left,
+.carousel-control.right {
+  background-image: none !important;
+  filter: none !important;
+}
+.carousel-control:hover {
+  opacity: 3.5;
+}
+
+/* home stylings: */
+
+.btn-info {
+  display: inline-block;
+  padding: 12px 24px;
+  font-size: 16px;
+  font-weight: bold;
+  text-align: center;
+  text-decoration: none;
+  border-radius: 4px;
+  border: none;
+  background-color: #e0b1a9;
+  color: #fff;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.index-button {
+  display: inline-block;
+  padding: 12px 24px;
+  font-size: 16px;
+  font-weight: bold;
+  text-align: center;
+  text-decoration: none;
+  border-radius: 4px;
+  border: none;
+  background-color: #e0b1a9;
+  color: #fff;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.index-button:hover {
+  background-color: #f6ff0057;
+  color: #fff;
+}
+
+.index-button:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px #f6ff0034;
+  color: #fff;
+}
+.index-button:active {
+  transform: translateY(1px);
+}
+
+/* admin-edit form styles*/
 
 #form-container {
   display: flexbox;
@@ -93,4 +201,236 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+/* Style for the form container */
+#edit-form-container {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Style for form labels */
+form label {
+  font-weight: bold;
+  margin-bottom: 5px;
+  display: block;
+}
+
+/* Style for submission edit form */
+.form-input,
+.form-textarea {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-bottom: 10px;
+}
+
+/* Style for form select */
+.form-select {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-bottom: 10px;
+}
+
+/* Style for form submit button */
+.form-button {
+  background-color: #4caf50;
+  color: white;
+  padding: 10px 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.form-button:hover {
+  background-color: #45a049;
+}
+
+.close-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: transparent;
+  border: none;
+  color: #888;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.close-button:hover {
+  color: #555;
+}
+
+/* Styles for admin page */
+#second-heading {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
+/* voting page stylings: */
+
+/* admin header stylings */
+#page-header {
+  background: linear-gradient(45deg, #f6ff0057, #e0b1a9);
+  margin-bottom: 3rem;
+  color: white;
+  padding: 20px 0;
+  text-align: center;
+}
+
+.header-container {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.header-container h1 {
+  margin-top: 0;
+  font-size: 28px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.header-container p {
+  font-size: 14px;
+  margin-bottom: 20px;
+}
+
+.divider {
+  width: 100px;
+  height: 2px;
+  background-color: #fff;
+  margin: 0 auto 20px;
+}
+
+.header-description {
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+/* links for the table */
+
+#status-buttons {
+  text-align: center;
+}
+#status-buttons ul {
+  list-style-type: none;
+  padding: 0;
+  margin-bottom: 2rem;
+}
+
+#status-buttons li {
+  display: inline-block;
+  margin-right: 10px;
+}
+
+#status-buttons a {
+  display: inline-block;
+  padding: 6px 12px;
+  background-color: #f2f2f2;
+  color: #333;
+  text-decoration: none;
+  border-radius: 4px;
+  transition: background-color 0.3s;
+}
+
+#status-buttons a:hover {
+  background-color: #e6e6e6;
+}
+
+/* admin form */
+.admin-category-table {
+  width: 90vw;
+  margin: auto;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+  background-color: white;
+}
+
+.admin-category-table th,
+.admin-category-table td {
+  padding: 10px;
+  border: 1px solid #ccc;
+}
+
+.admin-category-table th {
+  background-color: #f2f2f2;
+  font-weight: bold;
+}
+
+.admin-category-table td:first-child {
+  font-weight: bold;
+}
+
+.admin-category-table tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.admin-category-table tr:hover {
+  background-color: #e6e6e6;
+}
+
+/* Styling for the reset div */
+.admin-reset-div {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.admin-reset-div p {
+  margin-bottom: 10px;
+}
+
+.admin-reset-div button {
+  background-color: #f6ff0057;
+  color: white;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.admin-reset-div button:hover {
+  background-color: #cad10557;
+}
+
+/* Styling for the edit, approve, and deny buttons */
+.admin-category-table .admin-edit-button,
+.admin-category-table .admin-approve-button,
+.admin-category-table .admin-deny-button {
+  display: block;
+  width: 100%;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+  color: white;
+  transition: background-color 0.3s;
+  margin-bottom: 6px;
+}
+
+.admin-category-table .admin-edit-button {
+  background-color: #f6fe0194;
+}
+
+.admin-category-table .admin-approve-button {
+  background-color: #4caf50;
+}
+
+.admin-category-table .admin-deny-button {
+  background-color: #f44336;
+}
+
+.admin-category-table .admin-edit-button:hover,
+.admin-category-table .admin-approve-button:hover,
+.admin-category-table .admin-deny-button:hover {
+  background-color: #e0b1a9;
 }
