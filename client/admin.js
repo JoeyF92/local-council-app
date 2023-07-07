@@ -328,6 +328,36 @@ const showEditForm = (item, id) => {
   formContainer.hidden = false;
 };
 
+const submitEdit = async (e, id) => {
+  e.preventDefault();
+  const form = e.target;
+  const options = {
+    method: "put",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      title: form.elements.title.value,
+      category: form.elements.category.value,
+      proposal: form.elements.proposal.value,
+      photo: form.elements.photo.value,
+    }),
+  };
+  const response = await fetch(
+    `http://localhost:3000/submissions/${id}`,
+    options
+  );
+  console.log(response);
+  const data = await response.json();
+  if (response.status == 200) {
+    alert(`Successfully updated proposal!`);
+    window.location.href = "admin.html";
+  } else {
+    console.log(data.error);
+  }
+};
+
 const moveAndReset = async () => {
   // Move all remaining submissions to "denied"
   const deny = await fetch(`http://localhost:3000/submissions/denyAll`, {

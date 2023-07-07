@@ -28,7 +28,8 @@ const submitProposal = async (e, id) => {
   console.log(response);
   const data = await response.json();
   if (response.status == 201) {
-    console.log(`Successfully submitted proposal: ${data}`);
+    alert(`Successfully submitted proposal!`);
+    window.location.href = "index.html";
   } else {
     console.log(data.error);
   }
