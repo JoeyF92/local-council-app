@@ -28,15 +28,15 @@ You can now access the liveserver locally!
 We used:
 - Javascript
 - Node.js packages included:
-  *bcrypt
-  *jest
-  *express
-  *cors
-  *pg
-  *fs
-  *coverage
-  *uuid
-  *path
+  +bcrypt
+  +jest
+  +express
+  +cors
+  +pg
+  +fs
+  +coverage
+  +uuid
+  +path
 - CSS
 - HTML
 
